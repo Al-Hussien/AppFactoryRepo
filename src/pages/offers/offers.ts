@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { more } from '../more/more';
+import { InofferPage } from '../inoffer/inoffer';
 
 
 @Component({
@@ -12,8 +12,8 @@ export class offers {
   constructor(public navCtrl: NavController) {
 
   }
-  openMorePage() {
-    this.navCtrl.push(more);
+  openOfferPage() {
+    this.navCtrl.push(InofferPage);
   }
 
 }

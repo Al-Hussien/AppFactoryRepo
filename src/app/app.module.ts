@@ -10,6 +10,7 @@ import { places } from '../pages/places/places';
 import { fav } from '../pages/fav/fav';
 import { offers } from '../pages/offers/offers';
 import { more } from '../pages/more/more';
+import { InofferPage } from '../pages/inoffer/inoffer';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,6 +33,7 @@ const environment = {
     places,
     fav,
     offers,
+    InofferPage,
     more,
     TabsPage
   ],
@@ -47,6 +49,7 @@ const environment = {
     places,
     fav,
     offers,
+    InofferPage,
     more,
     TabsPage
   ],
