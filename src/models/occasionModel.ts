@@ -9,7 +9,8 @@ export interface Occasion {
     StartDateMonth: String;
     EndDateDay: String;
     EndDateMonth: String;
-    DaysLeft:number;
+    DaysLeft: number;
+    DaysPast: string;
     Branch: Branch[];
     Image: String[];
     OfferStatusCSS: string;

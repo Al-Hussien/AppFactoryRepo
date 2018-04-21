@@ -43,6 +43,21 @@ export class offers {
             Date.parse(new Date().toString())
           )/(1000*60*60*24)
         ):0;
+        element.DaysPast = Math.round(
+          (
+            Date.parse(new Date().toString())
+            -
+            Date.parse(new Date(element.StartDate.toString()).toString())
+          )/(1000*60*60*24)
+        )<=0?"اليوم":"منذ "+
+        Math.round(
+          (
+            Date.parse(new Date().toString())
+            -
+            Date.parse(new Date(element.StartDate.toString()).toString())
+          )/(1000*60*60*24)
+        )
+        +" ايام";
         element.OfferStatusCSS = element.DaysLeft > 0 ?"":"offer-ended";
         element.DaysLeftPercentageCSS = (Math.round((element.DaysLeft/(
           Math.round(
