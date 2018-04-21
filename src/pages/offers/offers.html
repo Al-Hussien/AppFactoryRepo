@@ -1,6 +1,6 @@
 <ion-content >
-  <ion-card class="offer-card " *ngFor="let occasion of occasions"  >
-      <ion-row class="date-row {{occasion.OfferStatusCSS}}">
+  <ion-card class="offer-card  " *ngFor="let occasion of occasions"  >
+      <ion-row class="date-row row {{occasion.OfferStatusCSS}}">
         <ion-col><span>{{occasion.StartDateMonth}} </span><span>/ {{occasion.StartDateDay}}</span></ion-col>
         <ion-col><span [style.width]="occasion.DaysLeftPercentageCSS + '%'"> <span>باقى {{occasion.DaysLeft}} يوم</span> </span></ion-col>
         <ion-col><span>{{occasion.EndDateMonth}} </span><span>/ {{occasion.EndDateDay}}</span></ion-col>
@@ -9,7 +9,7 @@
         <img src="{{occasion.Image[0]}}">
         <span>
           <p>{{occasion.Title}}</p>
-          <span>+{{occasion.Image.length-1}}</span>
+          <span>{{occasion.Image.length-1}}+</span>
         </span>
       </a>
       <ion-card-content>

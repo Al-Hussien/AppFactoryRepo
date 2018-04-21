@@ -95,11 +95,15 @@ page-offers {
            margin: 5px;
            display: block;
            position: relative;
-           min-height: 332px;
+           min-height: 205px;
            background-image: url("../assets/imgs/def.png");
            background-size: 50%;
            background-repeat: no-repeat;
            background-position: center;
+           img{
+            min-height: 205px;
+            margin: auto;
+           }
            & > span {
             position: absolute;
             bottom: 0;
@@ -109,7 +113,7 @@ page-offers {
             height: 100%;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.35), transparent);
             color: #fff;
-            padding-top: 45%;
+            padding-top: 40%;
             text-shadow: 1px 1px 9px rgba(0, 0, 0, 1);
             font-family: sans-serif;
             & > span{
