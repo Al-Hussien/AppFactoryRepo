@@ -23,11 +23,14 @@ page-offers {
                & > span{
                 background-color: #ef9300;
                 width: 50%;
+                min-width: 50px;
                 display: inline-block;
-                position: relative;
+                position: absolute;
                 height: 10px;
-                top: 0px;
+                top: calc(50% - 5px);
+                right: 0;
                 & > span{
+                    min-width: 64px;
                     position: absolute;
                     top: -26px;
                     height: 20px;
@@ -92,25 +95,50 @@ page-offers {
            margin: 5px;
            display: block;
            position: relative;
+           min-height: 332px;
+           background-image: url("../assets/imgs/def.png");
+           background-size: 50%;
+           background-repeat: no-repeat;
+           background-position: center;
            & > span {
-               position: absolute;
-               bottom: 0;
-               display: block;
-               width: 100%;
-               text-align: center;
-               height: 35%;
-               background: linear-gradient(to top , rgba(0, 0, 0, 0.3) 55%, rgba(0, 0, 0, 0.25), transparent);
-               font-size: 24px;
-               color: #fff;
-               padding-top: 10%;
-               text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.79);
-               font-family: sans-serif;
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.35), transparent);
+            color: #fff;
+            padding-top: 45%;
+            text-shadow: 1px 1px 9px rgba(0, 0, 0, 1);
+            font-family: sans-serif;
+            & > span{
+                font-size: 20px;
+                border: 2px solid;
+                padding: 1px 7px;
+                border-radius: 30px;
+                background-color: rgba(255, 255, 255, 0.25);
+            }
+            & > p {
+                color: #fff;
+                font-size: 26px;
+                text-align: center;
+                margin-bottom: 5px;
+            }
            }
         }
         .card-content-md {
-           padding: 5px 10px;
-           p{
-               color: #585858;
+           padding: 5px;
+           text-align: justify;
+           span{
+            color: #585858;
+            background-color: #eaeaea;
+            margin: 2px 1px;
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 10px;
+            font-size: 11px;
+            border: 1px solid #ccc;
            }
         }
         .posted-from{
@@ -120,8 +148,7 @@ page-offers {
             }
         }
     }
-    .offer-ended{
-        .date-row{
+    .offer-ended.date-row{
             color: #fff;
              & .col:first-child{
                 background-color: #e44343;
@@ -138,6 +165,7 @@ page-offers {
                 & > span{
                     background-color: #e8e8e8;
                     color: #e44343;
+                    min-width: 45px;
                     &::after{
                         content: '';
                         border-top: 10px solid #e8e8e8;
@@ -151,12 +179,13 @@ page-offers {
                     color: #e44343;
                 }
              }
-         }
-         a  {
-            & > span {
-                color: #fff;
+         
+            a  {
+                & > span {
+                    color: #fff;
+                }
             }
-         }
+
     }
-   }
+}
    

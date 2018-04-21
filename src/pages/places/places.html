@@ -1,4 +1,26 @@
 
-<ion-content padding>
-    
+<ion-content>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-select [(ngModel)]="cityID" interface="popover" placeholder="المحافظه">
+                    <ion-option value="f">الاسكندريه</ion-option>
+                    <ion-option value="m">دمياط</ion-option>
+                    <ion-option value="s">كفر الشيخ</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-select [(ngModel)]="areaID" interface="popover" placeholder="المنطقه">
+                    <ion-option value="f">سموحه</ion-option>
+                    <ion-option value="m">الابراهيميه</ion-option>
+                    <ion-option value="s">الهنوفيل</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <div class="map-container">
+
+    </div>
 </ion-content>

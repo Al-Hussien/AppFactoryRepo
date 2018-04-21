@@ -6,6 +6,8 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'places.html'
 })
 export class places {
+  cityID: number;
+  areaID: number;
 
   constructor(public navCtrl: NavController) {
 

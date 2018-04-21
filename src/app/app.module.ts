@@ -15,6 +15,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { OccasionProvider } from '../providers/occasion/occasion';
 
 const environment = {
   production: false,
@@ -56,7 +57,8 @@ const environment = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    OccasionProvider
   ]
 })
 export class AppModule {}

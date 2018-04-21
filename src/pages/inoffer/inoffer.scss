@@ -1,3 +1,159 @@
 page-inoffer {
+    .date-row{
+        color: #fff;
+        margin: 10px 0;
+        position: relative;
+        height: 55px;
+        padding: 25px 5px 0;
+        box-shadow: 0 3px 5px #c1c1c1;
+         & .col:first-child{
+            background-color: #ef9300;
+            right: 4px;
+            &::before{
+                content: "من";
+                right: 12px;
+            }
+         }
+         & .col:nth-child(2){
+            padding: 0;
+            background-color: #e8e8e8;
+            height: 14px;
+            top: 3px;
+            z-index: 9;
+            position: relative;
+            & > span{
+             background-color: #ef9300;
+             width: 50%;
+             min-width: 50px;
+             display: inline-block;
+             position: absolute;
+             height: 10px;
+             top: calc(50% - 5px);
+             right: 0;
+             & > span{
+                 min-width: 64px;
+                 position: absolute;
+                 top: -26px;
+                 height: 20px;
+                 background-color: #e8e8e8;
+                 left: -12px;
+                 color: #ef9300;
+                 font-size: 13px;
+                 padding: 2px 7px;
+                 display: inline-block;
+                 text-align: center;
+                 border-radius: 8px;
+                 -webkit-box-shadow: 0px 0px 4px #555;
+                 box-shadow: 0px 0px 4px #555;
+                 &::after{
+                     content: '';
+                     position: absolute;
+                     left: calc(50% - 10px);
+                     top: 100%;
+                     width: 0;
+                     height: 0;
+                     border-left: 10px solid transparent;
+                     border-right: 10px solid transparent;
+                     border-top: 10px solid #e8e8e8;
+                     clear: both;
+                 }
+             }
+         }
 
+         }
+         & .col:last-child{
+            background-color: rgb(232, 232, 232);
+            color: #ef9300;
+            left: 4px;
+            &::before{
+                content: "إلى";
+                left: 12px;
+
+            }
+         }
+         & .col:last-child,& .col:first-child{
+             border-radius: 20px 50px 50px 20px;
+             border-bottom-right-radius: 80%;
+             border-top-right-radius: 80%;
+             height: 20px;
+             padding: 1px 7px 0 5px;
+             border: 2px solid #e8e8e8;
+             text-align: left;
+             display: inline-block;
+             width: auto;
+             flex: none;
+             &::before{
+                 color: #ef9300;
+                 position: absolute;
+                 top: -19px;
+                 font-size: 14px;
+                 font-weight: bold;
+ 
+             }
+         }
+     }
+     .offer-ended.date-row{
+        color: #fff;
+         & .col:first-child{
+            background-color: #e44343;
+            &::before{
+                color: #e44343;
+            }
+         }
+         & .col:nth-child(2){
+            background-color: #e8e8e8;
+         }
+         & .col:nth-child(2) > span{
+            background-color: #e44343;
+            width: 100%;
+            & > span{
+                background-color: #e8e8e8;
+                color: #e44343;
+                min-width: 45px;
+                &::after{
+                    content: '';
+                    border-top: 10px solid #e8e8e8;
+                }
+            }
+         }
+         & .col:last-child{
+            color: #fff;
+            background-color: #e44343;
+            &::before{
+                color: #e44343;
+            }
+         }
+     
+        a  {
+            & > span {
+                color: #fff;
+            }
+        }
+
+    }
+    ion-card{
+        border: 3px solid #f1f1f1;
+        border-radius: 5px;
+        position: relative;
+        min-height: 230px;
+        background-image: url(../assets/imgs/def.png) !important;
+        background-size: 50% !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        img{
+            border-radius: 5px;
+
+        }
+        .in-action{
+            ion-col{
+                text-align: center;
+                .button-clear-md{
+                    color: #616770;
+                }
+                .button-clear-md.active{
+                    color: #f7921c;
+                }
+            }
+        }
+    }
 }
