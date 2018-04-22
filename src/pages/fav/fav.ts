@@ -14,5 +14,26 @@ export class fav {
     this.ImageURLArray = ImageArrayOject["imgArry"];
 
   }
+  removeFav(imgUrl: string ) {
+    debugger
+    for (let index = 0; index < this.ImageURLArray.length; index++) {
+      if (this.ImageURLArray[index] == imgUrl) {
+        this.ImageURLArray.splice(index , 1);
+      }
+      
+    }
+    
+    var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
+    if(ImageArrayOject == null)
+    {
+      var obj: { imgArry: string[]; } = { imgArry: this.ImageURLArray };
+      ImageArrayOject = {...obj}
+    }
+    else
+    {
+      ImageArrayOject["imgArry"] = this.ImageURLArray;
+    }
+    localStorage.setItem("FavImage", JSON.stringify(ImageArrayOject));
+  }
 
 }

@@ -4,7 +4,7 @@
         <img src="{{imgURL}}">
         <ion-row class="in-action">
             <ion-col>
-              <button ion-button icon-right clear small>
+              <button (click)="removeFav(imgURL)" ion-button icon-right clear small>
                 <ion-icon name="trash"></ion-icon>
                 <div>حذف</div>
               </button>
