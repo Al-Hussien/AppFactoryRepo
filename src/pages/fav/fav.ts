@@ -6,8 +6,12 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'fav.html'
 })
 export class fav {
+  ImageURLArray:string[];
 
   constructor(public navCtrl: NavController) {
+    debugger
+    var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
+    this.ImageURLArray = ImageArrayOject["imgArry"];
 
   }
 

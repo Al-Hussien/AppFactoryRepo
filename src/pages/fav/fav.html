@@ -1,7 +1,7 @@
 
 <ion-content >
-    <ion-card>
-        <img src="assets/imgs/product.jpg">
+    <ion-card *ngFor="let imgURL of ImageURLArray">
+        <img src="{{imgURL}}">
         <ion-row class="in-action">
             <ion-col>
               <button ion-button icon-right clear small>
@@ -17,7 +17,7 @@
             </ion-col>
         </ion-row>
     </ion-card>
-    <ion-card>
+    <!-- <ion-card>
         <img src="assets/imgs/pr2.jpg">
         <ion-row class="in-action">
             <ion-col>
@@ -101,6 +101,6 @@
               </button>
             </ion-col>
         </ion-row>
-    </ion-card>
+    </ion-card> -->
   </ion-content>
   

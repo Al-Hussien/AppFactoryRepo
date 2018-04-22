@@ -1,15 +1,15 @@
 
 <ion-content >
-    <ion-row class="date-row">
-      <ion-col><span>3 </span><span>/ 1</span></ion-col>
-      <ion-col><span> <span>باقى 33 يوم</span> </span></ion-col>
-      <ion-col><span>3 </span><span>/ 15</span></ion-col>
-    </ion-row>
-  <ion-card>
-      <img src="assets/imgs/product.jpg">
+    <ion-row class="date-row row {{occasionObject.OfferStatusCSS}}">
+        <ion-col><span>{{occasionObject.StartDateMonth}} </span><span>/ {{occasionObject.StartDateDay}}</span></ion-col>
+        <ion-col><span [style.width]="occasionObject.DaysLeftPercentageCSS + '%'"> <span>باقى {{occasionObject.DaysLeft}} يوم</span> </span></ion-col>
+        <ion-col><span>{{occasionObject.EndDateMonth}} </span><span>/ {{occasionObject.EndDateDay}}</span></ion-col>
+      </ion-row>
+  <ion-card *ngFor="let offerImage of occasionObject.Image">
+      <img src="{{offerImage}}">
       <ion-row class="in-action">
           <ion-col>
-            <button ion-button icon-right clear small class="active">
+            <button (click)="addFav(offerImage)" ion-button icon-right clear small class="active">
               <ion-icon name="heart"></ion-icon>
               <div>مفضله</div>
             </button>

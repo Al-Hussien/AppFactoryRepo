@@ -5,7 +5,7 @@
         <ion-col><span [style.width]="occasion.DaysLeftPercentageCSS + '%'"> <span>باقى {{occasion.DaysLeft}} يوم</span> </span></ion-col>
         <ion-col><span>{{occasion.EndDateMonth}} </span><span>/ {{occasion.EndDateDay}}</span></ion-col>
       </ion-row>
-      <a (click)="openOfferPage()" >
+      <a (click)="openOfferPage(occasion)" >
         <img src="{{occasion.Image[0]}}">
         <span>
           <p>{{occasion.Title}}</p>

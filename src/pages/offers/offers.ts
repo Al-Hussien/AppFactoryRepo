@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, DateTime } from 'ionic-angular';
+import { NavController,NavParams , DateTime } from 'ionic-angular';
 import { InofferPage } from '../inoffer/inoffer';
 
 import { OccasionProvider } from '../../providers/occasion/occasion';
@@ -13,7 +13,7 @@ import { parseDate, DateTimeData } from 'ionic-angular/util/datetime-util';
 })
 export class offers {
   occasions: Occasion[];
-  constructor(public navCtrl: NavController, private occasionProvider: OccasionProvider) {
+  constructor(public navCtrl: NavController,public navParm: NavParams, private occasionProvider: OccasionProvider) {
   }
 
   ngOnInit() {
@@ -79,8 +79,9 @@ export class offers {
       });
     });
   }
-  openOfferPage() {
-    this.navCtrl.push(InofferPage);
+  openOfferPage(inputData: Occasion ) {
+    debugger
+    this.navCtrl.push(InofferPage, {"inofferObject":inputData});
   }
 
 }
