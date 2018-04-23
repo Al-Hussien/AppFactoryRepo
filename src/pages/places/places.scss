@@ -52,8 +52,8 @@ places {
             }
         }
     }
-    .map-container{
-        height: calc(100% - 55px);
-    }
+    #map {
+        height: 100%;
+      }
 
 }

@@ -18,6 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { OccasionProvider } from '../providers/occasion/occasion';
 import { InofferProvider } from '../providers/inoffer/inoffer';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 const environment = {
   production: false,
   firebase: {
@@ -60,7 +62,8 @@ const environment = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OccasionProvider,
-    InofferProvider
+    InofferProvider,
+    Geolocation
   ]
 })
 export class AppModule {}
