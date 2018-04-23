@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams , DateTime } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { InofferPage } from '../inoffer/inoffer';
 
 import { OccasionProvider } from '../../providers/occasion/occasion';
@@ -20,12 +20,6 @@ export class offers {
     this.occasionProvider.getOccasions().subscribe(occasions => {
       this.occasions = occasions;
       this.occasions.forEach(element => {
-        
-        // this.gc = Date.parse(new Date(element.StartDate.toString()).toString());
-        // this.gg = (new Date().getUTCMilliseconds().toString());
-        // this.gg = (new Date()).getUTCMilliseconds().toString();
-        // element.StartDateDay = parseDate(element.StartDate) ;
-        debugger
         element.StartDateDay = (new Date(element.StartDate.toString())).getDate().toString();
         element.StartDateMonth = ((new Date(element.StartDate.toString())).getMonth()+1).toString();
         element.EndDateDay = (new Date(element.EndDate.toString())).getDate().toString();
@@ -80,7 +74,6 @@ export class offers {
     });
   }
   openOfferPage(inputData: Occasion ) {
-    debugger
     this.navCtrl.push(InofferPage, {"inofferObject":inputData});
   }
 
