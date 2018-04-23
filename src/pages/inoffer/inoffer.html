@@ -1,8 +1,14 @@
 <ion-content >
+  <ion-row class="in-title">
+      <p>{{occasionObject.Title}}</p>
+  </ion-row>
     <ion-row class="date-row row {{occasionObject.OfferStatusCSS}}">
         <ion-col><span>{{occasionObject.StartDateMonth}} </span><span>/ {{occasionObject.StartDateDay}}</span></ion-col>
         <ion-col><span [style.width]="occasionObject.DaysLeftPercentageCSS + '%'"> <span>باقى {{occasionObject.DaysLeft}} يوم</span> </span></ion-col>
         <ion-col><span>{{occasionObject.EndDateMonth}} </span><span>/ {{occasionObject.EndDateDay}}</span></ion-col>
+      </ion-row>
+      <ion-row class="in-title">
+          <span *ngFor="let branch of occasionObject.Branch">{{branch.Name}} </span>
       </ion-row>
   <ion-card *ngFor="let offerImage of occasionObject.Image">
       <img src="{{offerImage}}">
