@@ -2,7 +2,7 @@
   <ion-card class="offer-card  " *ngFor="let occasion of occasions"  >
       <ion-row class="date-row row {{occasion.OfferStatusCSS}}">
         <ion-col><span>{{occasion.StartDateMonth}} </span><span>/ {{occasion.StartDateDay}}</span></ion-col>
-        <ion-col><span [style.width]="occasion.DaysLeftPercentageCSS + '%'"> <span>باقى {{occasion.DaysLeft}} يوم</span> </span></ion-col>
+        <ion-col><span [style.width]="occasion.DaysPastPercentageCSS + '%'"> <span>باقى {{occasion.DaysLeft}} يوم</span> </span></ion-col>
         <ion-col><span>{{occasion.EndDateMonth}} </span><span>/ {{occasion.EndDateDay}}</span></ion-col>
       </ion-row>
       <a (click)="openOfferPage(occasion)" >
@@ -24,7 +24,7 @@
           </ion-col>
           <ion-col col-8 text-left>
             <ion-note>
-              {{occasion.DaysPast}}
+              {{occasion.PublishDays}}
             </ion-note>
           </ion-col>
         </ion-row>
