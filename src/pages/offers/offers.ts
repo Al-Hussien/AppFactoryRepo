@@ -17,7 +17,14 @@ export class offers {
   }
 
   ngOnInit() {
-    this.getOffers();
+    
+    var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
+    if(ImageArrayOject == null){
+      var obj: { imgArry: string[]; } = { imgArry: [] };
+      ImageArrayOject = {...obj}
+      localStorage.setItem("FavImage", JSON.stringify(ImageArrayOject));
+    }
+
     this.occasionProvider.getOccasions().subscribe(occasions => {
       this.occasions = occasions;
       this.occasions.forEach(element => {
@@ -68,7 +75,6 @@ export class offers {
         // days left calc days letf
         // calc total days
         //divide 
-        debugger
         element.DaysPastPercentageCSS = 
           (
             Math.round((parseInt(element.OfferDaysPast)/parseInt(element.OfferDays)*100)* 100) / 100
@@ -80,11 +86,6 @@ export class offers {
           "100";
       });
     });
-  }
-
-  getOffers()
-  {
-
   }
 
 
