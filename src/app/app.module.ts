@@ -16,6 +16,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OccasionProvider } from '../providers/occasion/occasion';
+import { MapsProvider } from '../providers/maps/maps';
+
 import { InofferProvider } from '../providers/inoffer/inoffer';
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -63,7 +65,8 @@ const environment = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OccasionProvider,
     InofferProvider,
-    Geolocation
+    Geolocation,
+    MapsProvider
   ]
 })
 export class AppModule {}

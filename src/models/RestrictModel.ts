@@ -3,7 +3,6 @@ import { GeoPoint } from "@firebase/firestore-types";
 export interface Branch {
     id?: string;
     Name: string;
-    Location: GeoPoint;
+    CenterPoint: GeoPoint;
     City: string;
-    Restriction: string;
   }

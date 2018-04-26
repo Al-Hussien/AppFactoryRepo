@@ -3,16 +3,20 @@
     <ion-row>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="cityID" interface="popover" placeholder="المحافظه">
-                    <ion-option value="f">الاسكندريه</ion-option>
-                    <ion-option value="m">دمياط</ion-option>
-                    <ion-option value="s">كفر الشيخ</ion-option>
+                <ion-select [(ngModel)]="cityID" (ngModelChange)="getBranchesOfCity($event)" interface="popover" placeholder="المحافظه">
+                    <ion-option  *ngFor="let o of branches" [value]="o.City">{{o.Name}}</ion-option>
                 </ion-select>
+<!-- 
+                <select [(ng-model)]="objValue1">
+                    <option *ng-for="#o of objArray" [value]="o">{{o.name}}</option>
+                </select> -->
+
+
             </ion-item>
         </ion-col>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="areaID" interface="popover" placeholder="المنطقه">
+                <ion-select [(ngModel)]="areaID" ng-options="item as item.label for item in items track by item.id" interface="popover" placeholder="المنطقه">
                     <ion-option value="f">سموحه</ion-option>
                     <ion-option value="m">الابراهيميه</ion-option>
                     <ion-option value="s">الهنوفيل</ion-option>

@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
+import { MapsProvider } from '../../providers/maps/maps';
+import { Branch } from '../../models/BranchModel';
 // import { googlemaps, google} from '@types/googlemaps';
 
 declare var google;
@@ -8,7 +10,7 @@ let map: any;
 let infowindow: any;
 let options = {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 200000,
   maximumAge: 0
 };
 @Component({
@@ -18,22 +20,25 @@ let options = {
 export class places {
   cityID: number;
   areaID: number;
-  map:GoogleMap;
+  branches: Branch[];
+  // map:GoogleMap;
 
   @ViewChild('map') mapElement: ElementRef;
 
-  constructor(public navCtrl: NavController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public platform: Platform, private mapsProvider: MapsProvider) {
     debugger
     platform.ready().then(() => {
       this.loadMap();
     });
+    // this.mapsProvider.getBranchesProv().subscribe(branches => this.branches = branches );
+    this.getBranchesOfCity("Cairo");
 
   }
   loadMap() {
     debugger
-    this.map = new GoogleMap('map');
+    map = new GoogleMap('map');
 
-    this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+    map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
       console.log('Map is ready!');
       this.initMap()
     });
@@ -80,5 +85,23 @@ export class places {
       infowindow.open(map, this);
     });
   }
-
+  getCities()
+  {}
+  getRestriction(cityID:string)
+  {}
+  getBranchesOfCity(city:string)
+  {
+    debugger
+    this.mapsProvider.getBranchesCityProv(city).subscribe(branches => this.branches = branches );
+    let x = this.cityID;
+    //this.branches.filter(oo => oo.CityID == cityID);
+  }
+  getBranchesOfRestriction(cityID:string)
+  {
+    return [];
+  }
+  moveCameraTo(longPoint:string, latPoint:string)
+  {}
+  deleteMarkers()
+  {}
  }
