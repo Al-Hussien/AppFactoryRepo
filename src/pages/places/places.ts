@@ -51,8 +51,8 @@ export class places {
 
   onCityChange(city:string)
   {
-    this.clearMarkers();
-    this.getRestrictsCity(city);
+    this.clearMarkers();//done
+    this.getRestrictsCity(city);//done
     this.getBranchesOfCityRestrict(city);
     this.goToCityLocation(city);
   }
@@ -100,14 +100,14 @@ export class places {
       this.set_bounds().then(function () {
         currentBounds = map.getBounds();
       });
-
-      
-
-      this.getBranchesOfCityRestrict("الإسكندرية").then((result) => {
+debugger
+      var cityName = (location.coords.longitude<=30.086384 && location.coords.longitude >= 29.534382)?"الإسكندرية":(location.coords.longitude<=30.086384 && location.coords.longitude >= 31.227967)?"القاهرة":""
+      //try to get the city location dynamic
+      this.getBranchesOfCityRestrict(cityName).then((result) => {
         this.branches = [...result];
         this.branches.forEach(element => {
           var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
-          //if (currentBounds.contains(currentLocation)) {
+          //if ( currentBounds.contains(currentLocation)) {
             this.createMarker(element.CenterPoint,element.Name);
           //}
         });

@@ -63,7 +63,11 @@ export class MapsProvider {
     let branarry:Branch[]=[];
     this.afs.collection('Branches').ref.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        branarry.push(doc.data() as Branch);
+        var tempData = doc.data() as Branch;
+        if(tempData.City == city&&(restrict==undefined || tempData.Restriction== restrict))
+        {
+          branarry.push(doc.data() as Branch);
+        }
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data() as Branch);
       });    
