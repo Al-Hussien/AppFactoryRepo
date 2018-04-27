@@ -6,6 +6,7 @@ import { Branch } from '../../models/BranchModel';
 import { City } from '../../models/CityModel';
 import { Restrict } from '../../models/RestrictModel';
 import { GeoPoint } from '@firebase/firestore-types';
+import { Title } from '@angular/platform-browser';
 // import { googlemaps, google} from '@types/googlemaps';
 
 declare var google;
@@ -105,12 +106,10 @@ export class places {
       this.getBranchesOfCityRestrict("الإسكندرية").then((result) => {
         this.branches = [...result];
         this.branches.forEach(element => {
-          debugger
-          var currentLocation = new google.maps.LatLng(element.Location.latitude,element.Location.longitude);
-          
-          if (currentBounds.contains(currentLocation)) {
-            this.createMarker(element.Location);
-          }
+          var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
+          //if (currentBounds.contains(currentLocation)) {
+            this.createMarker(element.CenterPoint,element.Name);
+          //}
         });
     });
       
@@ -142,18 +141,22 @@ export class places {
     });
   }
 
-  createMarker(place) {
+  createMarker(place:GeoPoint, branchName:string) {
     debugger
-    var placeLoc = place.geometry.location;
+    //var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
-      position: placeLoc
+      position: {lat:place.latitude,lng:place.longitude},
+      title:branchName
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
     });
     markersArry.push(marker);
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   //infowindow.setContent(place.name);
+    //   //infowindow.open(map, this);
+    // });
   }
   clearMarkers() {
     for (let index = 0; index < markersArry.length; index++) {
