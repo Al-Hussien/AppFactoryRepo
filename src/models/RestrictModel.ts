@@ -1,6 +1,6 @@
 import { GeoPoint } from "@firebase/firestore-types";
 
-export interface Branch {
+export interface Restrict {
     id?: string;
     Name: string;
     CenterPoint: GeoPoint;
