@@ -105,15 +105,36 @@ export class MapsProvider {
         setTimeout(resolve, milliseconds);
     });
 }
-  getCityCenterPointProv(city: string) {
-    this.cityCollection = this.afs.collection('Cities');
-    this.cityCollection.snapshotChanges().map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as City;
-        data.id = a.payload.doc.id;
-        return data;
-      }).filter(opt => opt.Name == city)[0].CenterPoint;
-    }).subscribe(opt => this.retValLocation = opt);
-    return this.retValLocation;
+  async getCityCenterPointProv(city: string) {
+    debugger
+    // this.cityCollection = this.afs.collection('Cities');
+    // this.cityCollection.snapshotChanges().map(changes => {
+    //   return changes.map(a => {
+    //     const data = a.payload.doc.data() as City;
+    //     data.id = a.payload.doc.id;
+    //     return data;
+    //   }).filter(opt => opt.Name == city)[0].CenterPoint;
+    // }).subscribe(opt => this.retValLocation = opt);
+
+
+    let cityLoc:GeoPoint=undefined;
+    this.afs.collection('Cities').ref.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        var tempData = doc.data() as City;
+        if(tempData.Name == city)
+        {
+          cityLoc = tempData.CenterPoint;
+        }
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data() as Branch);
+      });    
+    });
+    do {
+      await this.delay(200);
+    } while (cityLoc == undefined);
+
+
+
+    return cityLoc;
   }
 }

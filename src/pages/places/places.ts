@@ -53,7 +53,15 @@ export class places {
   {
     this.clearMarkers();//done
     this.getRestrictsCity(city);//done
-    this.getBranchesOfCityRestrict(city);
+    this.getBranchesOfCityRestrict(city).then((result) => {
+      this.branches = [...result];
+      this.branches.forEach(element => {
+        var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
+        //if ( currentBounds.contains(currentLocation)) {
+          this.createMarker(element.CenterPoint,element.Name);
+        //}
+      });
+  });
     this.goToCityLocation(city);
   }
 
@@ -100,7 +108,6 @@ export class places {
       this.set_bounds().then(function () {
         currentBounds = map.getBounds();
       });
-debugger
       var cityName = (location.coords.longitude<=30.086384 && location.coords.longitude >= 29.534382)?"الإسكندرية":(location.coords.longitude<=30.086384 && location.coords.longitude >= 31.227967)?"القاهرة":""
       //try to get the city location dynamic
       this.getBranchesOfCityRestrict(cityName).then((result) => {
@@ -142,22 +149,28 @@ debugger
   }
 
   createMarker(place:GeoPoint, branchName:string) {
-    debugger
     //var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
       position: {lat:place.latitude,lng:place.longitude},
       title:branchName
     });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-    markersArry.push(marker);
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   //infowindow.setContent(place.name);
-    //   //infowindow.open(map, this);
+    // marker.addListener('click', function() {
+    //   infowindow.open(map, marker);
     // });
+    markersArry.push(marker);
+    this.addInfoWindow(marker,branchName)
   }
+  addInfoWindow(marker, message) {
+
+    var infoWindow = new google.maps.InfoWindow({
+        content: message
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open(map, marker);
+    });
+}
   clearMarkers() {
     for (let index = 0; index < markersArry.length; index++) {
       markersArry[index].setMap(null);
@@ -170,12 +183,16 @@ debugger
   }
   goToCityLocation(city: string)
   {
-    var newCenterPoint = this.mapsProvider.getCityCenterPointProv(city);
-    this.moveToLocation(newCenterPoint);
+    debugger
+    this.mapsProvider.getCityCenterPointProv(city).then((result) => {
+      this.moveToLocation(result);
+  });
+    
   }
 
   moveToLocation(centerPoint:GeoPoint)
   {
+    debugger
     var center = new google.maps.LatLng(centerPoint.latitude, centerPoint.longitude);
     // using global variable:
     map.panTo(center);
