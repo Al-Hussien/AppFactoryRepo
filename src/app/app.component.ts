@@ -16,9 +16,9 @@ export class MyApp {
 
 constructor(platform: Platform/*, cache: CacheService*/, statusBar: StatusBar, splashScreen: SplashScreen, /*imgCache: ImgCacheService*/ private imageLoaderConfig: ImageLoaderConfig) {
     platform.ready().then(() => {
-      this.imageLoaderConfig.enableDebugMode();
+      //this.imageLoaderConfig.enableDebugMode();
       this.imageLoaderConfig.enableFallbackAsPlaceholder(true);
-      this.imageLoaderConfig.setFallbackUrl('assets/imgs/logo.png');
+      //this.imageLoaderConfig.setFallbackUrl('assets/imgs/logo.png');
       this.imageLoaderConfig.setMaximumCacheAge(60*24*60*60*1000);
       // Set TTL to 12h
       //cache.setDefaultTTL(60 * 60 * 12);
