@@ -20,7 +20,7 @@ import { OnInit } from '@angular/core';
 export class InofferPage implements OnInit {
   occasionObject: Occasion;
   ImageURLArray:string[]=[];
-  StyleCSSArry:object[]=[];
+  StyleCSSArry:{imgUrl:String,CSSStyle:String,elemNo:number}[]=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private socialSharing: SocialSharing/*,private imageLoader: ImageLoader*/) {
@@ -52,7 +52,7 @@ export class InofferPage implements OnInit {
       }
       else{
         for (let index = 0; index < this.occasionObject.Image.length; index++) {
-          this.StyleCSSArry.splice(index , 1,{imgUrl:this.occasionObject.Image[index],CSSStyle:""});
+          this.StyleCSSArry.splice(index , 1,{imgUrl:this.occasionObject.Image[index],CSSStyle:"",elemNo:index});
           
         }
       }
@@ -63,8 +63,22 @@ export class InofferPage implements OnInit {
 
   addFav(imgUrl: string, elemNo:number ) {
     debugger
-    this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active"});
-    this.ImageURLArray.push(imgUrl)
+    // this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active"});
+    // this.StyleCSSArry[elemNo]['CSSStyle'] = "active";
+    if (this.StyleCSSArry[elemNo].CSSStyle == "active") {
+      this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"",elemNo:elemNo});
+      for (let index = 0; index < this.ImageURLArray.length; index++) {
+        if (this.ImageURLArray[index] == imgUrl) {
+          this.ImageURLArray.splice(index,1)
+        }
+      }
+    }
+    else
+    {
+      this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active",elemNo:elemNo});
+      this.ImageURLArray.push(imgUrl);
+    }
+    //this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active",elemNo:elemNo});
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     if(ImageArrayOject == null)
     {
