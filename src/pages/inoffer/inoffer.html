@@ -14,7 +14,7 @@
       <img-loader src="{{cssStyle['imgUrl']}}" useImg></img-loader>
       <ion-row class="in-action">
           <ion-col>
-            <button (click)="addFav(cssStyle['imgUrl'])" ion-button icon-right clear small [ngClass]="cssStyle['CSSStyle']">
+            <button (click)="addFav(cssStyle['imgUrl'], cssStyle['elemNo'])" ion-button icon-right clear small [ngClass]="cssStyle['CSSStyle']">
               <ion-icon name="heart"></ion-icon>
               <div>مفضله</div>
             </button>

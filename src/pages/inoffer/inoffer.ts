@@ -37,24 +37,33 @@ export class InofferPage implements OnInit {
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     if(ImageArrayOject != null){
       this.ImageURLArray = ImageArrayOject["imgArry"];
-      for (let index2 = 0; index2 < this.occasionObject.Image.length; index2++) {
-        for (let index = 0; index < this.ImageURLArray.length; index++) {
-          if (this.ImageURLArray[index] == this.occasionObject.Image[index2]) {
-            this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:"active"});
-            break;
+      if (this.ImageURLArray.length >0) {
+        for (let index2 = 0; index2 < this.occasionObject.Image.length; index2++) {
+          for (let index = 0; index < this.ImageURLArray.length; index++) {
+            if (this.ImageURLArray[index] == this.occasionObject.Image[index2]) {
+              this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:"active",elemNo:index2});
+              break;
+            }
+            else{
+              this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:"",elemNo:index2});
+            }
           }
-          else{
-            this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:""});
-          }
+        }
+      }
+      else{
+        for (let index = 0; index < this.occasionObject.Image.length; index++) {
+          this.StyleCSSArry.splice(index , 1,{imgUrl:this.occasionObject.Image[index],CSSStyle:""});
           
         }
       }
+      
     }
   }
 
 
-  addFav(imgUrl: string ) {
+  addFav(imgUrl: string, elemNo:number ) {
     debugger
+    this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active"});
     this.ImageURLArray.push(imgUrl)
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     if(ImageArrayOject == null)
