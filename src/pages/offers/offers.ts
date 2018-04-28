@@ -44,7 +44,7 @@ export class offers {
       //this.OccCnt = occasions.length.toString();
       if(this.OccCnt < occasions.length)
       {
-        this.fireNotification();
+        this.fireNotification(occasions.length-this.OccCnt);
         this.OccCnt = occasions.length;
         var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
     if(OccassionNewCountOject == null)
@@ -126,16 +126,16 @@ export class offers {
     this.navCtrl.push(InofferPage, {"inofferObject":inputData});
   }
 
-  fireNotification() {
+  fireNotification(newOccCnt) {
     var date = new Date();
     this.localNotifications.schedule({
-      text: 'Delayed ILocalNotification',
+      text: 'كارفور',
       led: 'FF0000',
       sound: this.setSound(),
     });
     let alert = this.alertCtrl.create({
-      title: 'Congratulation!',
-      subTitle: 'Notification setup successfully at '+date,
+      title: 'عرض جديد!',
+      subTitle: 'يوجد '+ newOccCnt +' عرض جديد',
       buttons: ['OK']
     });
     alert.present();
