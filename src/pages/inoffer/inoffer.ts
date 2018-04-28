@@ -20,6 +20,7 @@ import { OnInit } from '@angular/core';
 export class InofferPage implements OnInit {
   occasionObject: Occasion;
   ImageURLArray:string[]=[];
+  StyleCSSArry:object[]=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private socialSharing: SocialSharing/*,private imageLoader: ImageLoader*/) {
@@ -36,6 +37,18 @@ export class InofferPage implements OnInit {
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     if(ImageArrayOject != null){
       this.ImageURLArray = ImageArrayOject["imgArry"];
+      for (let index2 = 0; index2 < this.occasionObject.Image.length; index2++) {
+        for (let index = 0; index < this.ImageURLArray.length; index++) {
+          if (this.ImageURLArray[index] == this.occasionObject.Image[index2]) {
+            this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:"active"});
+            break;
+          }
+          else{
+            this.StyleCSSArry.splice(index2 , 1,{imgUrl:this.occasionObject.Image[index2],CSSStyle:""});
+          }
+          
+        }
+      }
     }
   }
 

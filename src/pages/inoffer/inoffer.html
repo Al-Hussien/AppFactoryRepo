@@ -10,17 +10,17 @@
       <ion-row class="in-title">
           <span *ngFor="let branch of occasionObject.Branch">{{branch.Name}} </span>
       </ion-row>
-  <ion-card *ngFor="let offerImage of occasionObject.Image">
-      <img-loader src="{{offerImage}}" useImg></img-loader>
+  <ion-card *ngFor="let cssStyle of StyleCSSArry">
+      <img-loader src="{{cssStyle['imgUrl']}}" useImg></img-loader>
       <ion-row class="in-action">
           <ion-col>
-            <button (click)="addFav(offerImage)" ion-button icon-right clear small class="active">
+            <button (click)="addFav(cssStyle['imgUrl'])" ion-button icon-right clear small [ngClass]="cssStyle['CSSStyle']">
               <ion-icon name="heart"></ion-icon>
               <div>مفضله</div>
             </button>
           </ion-col>
           <ion-col>
-            <button (click)="shareOffer(offerImage)" ion-button icon-right clear small>
+            <button (click)="shareOffer(cssStyle['imgUrl'])" ion-button icon-right clear small>
               <ion-icon name="share"></ion-icon>
               <div>مشاركه</div>
             </button>
