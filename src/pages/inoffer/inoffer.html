@@ -11,7 +11,7 @@
           <span *ngFor="let branch of occasionObject.Branch">{{branch.Name}} </span>
       </ion-row>
   <ion-card *ngFor="let offerImage of occasionObject.Image">
-      <img src="{{offerImage}}">
+      <img-loader src="{{offerImage}}" useImg></img-loader>
       <ion-row class="in-action">
           <ion-col>
             <button (click)="addFav(offerImage)" ion-button icon-right clear small class="active">
@@ -20,7 +20,7 @@
             </button>
           </ion-col>
           <ion-col>
-            <button ion-button icon-right clear small>
+            <button (click)="shareOffer(offerImage)" ion-button icon-right clear small>
               <ion-icon name="share"></ion-icon>
               <div>مشاركه</div>
             </button>

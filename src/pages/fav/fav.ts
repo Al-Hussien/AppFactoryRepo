@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'fav',
@@ -9,11 +10,14 @@ export class fav {
   ImageURLArray:string[];
 
   constructor(public navCtrl: NavController) {
+  }
+
+  ionViewWillEnter() {
     debugger
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     this.ImageURLArray = ImageArrayOject["imgArry"];
-
   }
+
   removeFav(imgUrl: string ) {
     debugger
     for (let index = 0; index < this.ImageURLArray.length; index++) {

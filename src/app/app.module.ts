@@ -22,6 +22,15 @@ import { InofferProvider } from '../providers/inoffer/inoffer';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
+
+import { IonicImageLoader } from 'ionic-image-loader';
+// import { ImgCacheModule } from 'ng-imgcache';
+import { CacheModule } from 'ionic-cache';
+import { HttpModule } from '@angular/http';
+
 const environment = {
   production: false,
   firebase: {
@@ -41,13 +50,17 @@ const environment = {
     offers,
     InofferPage,
     more,
-    TabsPage
+    TabsPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp,{tabsPlacement: 'top'}),
     AngularFireModule.initializeApp(environment.firebase, 'fatMrkt'),
     AngularFirestoreModule,
+    HttpModule,
+    // CacheModule.forRoot()
+    // ImgCacheModule
+    IonicImageLoader.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +79,9 @@ const environment = {
     OccasionProvider,
     InofferProvider,
     Geolocation,
-    MapsProvider
+    MapsProvider,
+    LocalNotifications,
+    SocialSharing
   ]
 })
 export class AppModule {}

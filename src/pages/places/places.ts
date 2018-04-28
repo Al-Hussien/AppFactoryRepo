@@ -8,6 +8,7 @@ import { Restrict } from '../../models/RestrictModel';
 import { GeoPoint } from '@firebase/firestore-types';
 import { Title } from '@angular/platform-browser';
 // import { googlemaps, google} from '@types/googlemaps';
+import { OnInit } from '@angular/core';
 
 declare var google;
 let map: any;
@@ -23,7 +24,7 @@ let markersArry = [];
   selector: 'places',
   templateUrl: 'places.html'
 })
-export class places {
+export class places implements OnInit {
   areaID: number;
   branches: Branch[];
   cities: City[];
@@ -35,10 +36,15 @@ export class places {
   @ViewChild('map') mapElement: ElementRef;
 
   constructor(public navCtrl: NavController, public platform: Platform, private mapsProvider: MapsProvider) {
+    
+  }
+
+  ngOnInit() {
+    debugger
     //fill the city ddl
     this.getCities();
     //fill up map
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       this.loadMap();
     });
   }
@@ -183,7 +189,6 @@ export class places {
   }
   goToCityLocation(city: string)
   {
-    debugger
     this.mapsProvider.getCityCenterPointProv(city).then((result) => {
       this.moveToLocation(result);
   });
@@ -192,7 +197,6 @@ export class places {
 
   moveToLocation(centerPoint:GeoPoint)
   {
-    debugger
     var center = new google.maps.LatLng(centerPoint.latitude, centerPoint.longitude);
     // using global variable:
     map.panTo(center);

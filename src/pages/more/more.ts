@@ -8,7 +8,8 @@ import { NavController } from 'ionic-angular';
 export class more {
 
   constructor(public navCtrl: NavController) {
-
+  }
+  ngOnInit() {
   }
 
 }
