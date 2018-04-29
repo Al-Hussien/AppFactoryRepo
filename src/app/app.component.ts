@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 // import { ImgCacheService } from 'ng-imgcache';
 import { ImageLoaderConfig } from 'ionic-image-loader';
 
+
 @Component({
   templateUrl: 'app.html'
 })

@@ -73,19 +73,21 @@ export class offers {
           )/(1000*60*60*24)
         ).toString();
 
-        element.DaysLeft = Math.round(
+        element.DaysLeft = (Math.round(
           (
             Date.parse(new Date(element.EndDate.toString()).toString())
             -
             Date.parse(new Date().toString())
           )/(1000*60*60*24)
-        )>0?Math.round(
+        )+1)>0?(Math.round(
           (
             Date.parse(new Date(element.EndDate.toString()).toString())
             -
             Date.parse(new Date().toString())
           )/(1000*60*60*24)
-        ).toString():"0";
+        )+1).toString():"0";
+
+        element.DaysLeftString = parseInt(element.DaysLeft) == 0 ?"انتهى":"باقى "+element.DaysLeft + " يوم";
         element.OfferDaysPast = (parseInt(element.OfferDays) - parseInt(element.DaysLeft)).toString();
         element.PublishDays = Math.round(
           (

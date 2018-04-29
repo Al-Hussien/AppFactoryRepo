@@ -4,6 +4,7 @@ import { Occasion } from '../../models/occasionModel';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ImageLoader } from 'ionic-image-loader';
 import { OnInit } from '@angular/core';
+import { offers } from '../offers/offers';
 
 /**
  * Generated class for the InofferPage page.
@@ -31,7 +32,10 @@ export class InofferPage implements OnInit {
     this.occasionObject = this.navParams.get('inofferObject');
     
   }
-
+  goBack() {
+    this.navCtrl.pop(offers)
+    
+  }
   ionViewWillEnter() {
     debugger
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
@@ -101,7 +105,7 @@ export class InofferPage implements OnInit {
     //   console.log("failed");
     // })
 
-    this.socialSharing.share('com.facebook.katana',"Fathallah Market Offer",null,"https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification")
+    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
     .then(function (params:any) {
       console.log("succeed");
     }).catch(function (params:any) {

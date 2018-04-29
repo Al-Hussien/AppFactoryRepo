@@ -27,9 +27,13 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { IonicImageLoader } from 'ionic-image-loader';
+
+
 // import { ImgCacheModule } from 'ng-imgcache';
 import { CacheModule } from 'ionic-cache';
 import { HttpModule } from '@angular/http';
+
+import { LazyLoadImageModule } from 'ng2-lazyload-image';
 
 const environment = {
   production: false,
@@ -60,7 +64,8 @@ const environment = {
     HttpModule,
     // CacheModule.forRoot()
     // ImgCacheModule
-    IonicImageLoader.forRoot()
+    IonicImageLoader.forRoot(),
+    LazyLoadImageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

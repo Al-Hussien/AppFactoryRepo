@@ -18,4 +18,6 @@ export interface Occasion {
     OfferStatusCSS: string;
     DaysPastPercentageCSS: string;
     Title: string;
+    DaysLeftString: string;
+    
   }
