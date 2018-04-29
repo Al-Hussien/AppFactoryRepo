@@ -95,13 +95,13 @@ page-offers {
            margin: 5px;
            display: block;
            position: relative;
-           min-height: 205px;
+           min-height: 250px;
            background-image: url("../assets/imgs/def.png");
            background-size: 50%;
            background-repeat: no-repeat;
            background-position: center;
            img{
-            min-height: 205px;
+            min-height: 250px;
             margin: auto;
            }
            & > span {
@@ -111,7 +111,7 @@ page-offers {
             width: 100%;
             text-align: center;
             height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.35), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0.1), transparent);
             color: #fff;
             padding-top: 40%;
             text-shadow: 1px 1px 9px rgba(0, 0, 0, 1);
@@ -135,14 +135,14 @@ page-offers {
            padding: 5px;
            text-align: justify;
            span{
-            color: #585858;
-            background-color: #eaeaea;
-            margin: 2px 1px;
+            color: #f7921c;
+            background-color: #fff4e6;
+            margin: 2px ;
             display: inline-block;
             padding: 1px 5px;
             border-radius: 10px;
             font-size: 11px;
-            border: 1px solid #ccc;
+            border: 1px solid #f7921c;
            }
         }
         .posted-from{
@@ -150,6 +150,9 @@ page-offers {
             .col{
                 top: -15px;
             }
+        }
+        .note-md{
+            color: #f7921c;
         }
     }
     .offer-ended.date-row{

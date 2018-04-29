@@ -10,7 +10,7 @@
         </ion-col>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="restrictName" (ngModelChange)="onRestrictChange($event)" interface="popover" placeholder="المحافظه">
+                <ion-select [(ngModel)]="restrictName" (ngModelChange)="onRestrictChange($event)" interface="popover" placeholder="الفرع">
                     <ion-option  *ngFor="let restrict of restricts" [value]="restrict.Name">{{restrict.Name}}</ion-option>
                 </ion-select>
             </ion-item>
