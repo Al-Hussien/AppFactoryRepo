@@ -14,6 +14,12 @@ import { OnInit } from '@angular/core';
 })
 export class offers {
   occasions: Occasion[];
+  ZeroDays: Occasion[];
+  MoreThanZeroDays: Occasion[];
+  tempArry: Occasion[];
+  
+
+  
   OccCnt:number=0;
   
   constructor(public navCtrl: NavController,public navParm: NavParams, private occasionProvider: OccasionProvider, public localNotifications: LocalNotifications,
@@ -22,7 +28,6 @@ export class offers {
   }
 
   ionViewWillEnter() {
-    debugger
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
     if(ImageArrayOject == null){
@@ -42,24 +47,28 @@ export class offers {
 
     this.occasionProvider.getOccasions().subscribe(occasions => {
       //this.OccCnt = occasions.length.toString();
+      
       if(this.OccCnt < occasions.length)
       {
         this.fireNotification(occasions.length-this.OccCnt);
         this.OccCnt = occasions.length;
         var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
-    if(OccassionNewCountOject == null)
-    {
-      var obj: { OccCnt: number; } = { OccCnt: this.OccCnt };
-      OccassionNewCountOject = {...obj}
-    }
-    else
-    {
-      OccassionNewCountOject["OccCnt"] = this.OccCnt;
-    }
-    localStorage.setItem("OccCnt", JSON.stringify(OccassionNewCountOject));
+        if(OccassionNewCountOject == null)
+        {
+          var obj: { OccCnt: number; } = { OccCnt: this.OccCnt };
+          OccassionNewCountOject = {...obj}
+        }
+        else
+        {
+          OccassionNewCountOject["OccCnt"] = this.OccCnt;
+        }
+        localStorage.setItem("OccCnt", JSON.stringify(OccassionNewCountOject));
       }
 
       this.occasions = occasions;
+      
+
+
       this.occasions.forEach(element => {
         element.StartDateDay = (new Date(element.StartDate.toString())).getDate().toString();
         element.StartDateMonth = ((new Date(element.StartDate.toString())).getMonth()+1).toString();
@@ -105,8 +114,8 @@ export class offers {
         element.OfferStatusCSS = parseInt(element.DaysLeft)  > 0 ?"":"offer-ended";
 
 
-
-
+        
+        // this.occasions.forEach(element => {})
         // days left calc days letf
         // calc total days
         //divide 
@@ -120,6 +129,8 @@ export class offers {
           :
           "100";
       });
+
+      this.sortOccasion(this.occasions);
     });
   }
 
@@ -142,7 +153,33 @@ export class offers {
     });
     alert.present();
   }
+  // addThis(elem)
+  // {
+  //   this.tempArry.push(elem);
+  // }
+  sortOccasion(newOccCnt) {
+    debugger
+    var newArr:Occasion[];
+    newArr = [...newOccCnt];
 
+    this.ZeroDays = newArr.filter(occ => occ.DaysLeft ===  "0");
+    this.MoreThanZeroDays = newArr.filter(occ => occ.DaysLeft !==  "0");
+    this.MoreThanZeroDays.sort((a, b)=>
+          {
+            return parseInt(a.PublishDays) - parseInt(b.PublishDays);
+          }
+        )
+        this.ZeroDays.sort((a, b)=>
+          {
+            return parseInt(a.PublishDays) - parseInt(b.PublishDays);
+          }
+        )
+    this.occasions = [];
+    this.occasions = this.MoreThanZeroDays.concat(this.ZeroDays);
+    // this.occasions = [...this.MoreThanZeroDays]
+    // this.occasions.concat(this.MoreThanZeroDays,this.ZeroDays)//.concat(this.ZeroDays);
+    //this.occasions.concat(this.ZeroDays)//.concat(this.ZeroDays);
+}
   setSound() {
     if (this.platform.is('android')) {
       return 'file://assets/sounds/Rooster.mp3'
