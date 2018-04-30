@@ -27,9 +27,11 @@ let markersArry = [];
 export class places implements OnInit {
   areaID: number;
   branches: Branch[];
+  branchesDDL: Branch[];
   cities: City[];
   cityName:string;
   restrictName:string;
+  branchName:string;
   restricts: Restrict[];
   // map:GoogleMap;
 
@@ -58,9 +60,10 @@ export class places implements OnInit {
   onCityChange(city:string)
   {
     this.clearMarkers();//done
-    this.getRestrictsCity(city);//done
+    //this.getRestrictsCity(city);//done
     this.getBranchesOfCityRestrict(city).then((result) => {
       this.branches = [...result];
+      // this.branchesDDL = [...this.branches];
       this.branches.forEach(element => {
         var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
         //if ( currentBounds.contains(currentLocation)) {
@@ -73,7 +76,19 @@ export class places implements OnInit {
 
   onRestrictChange(city:string, restrict:string)
   {
-    this.getBranchesOfCityRestrict(city,restrict);
+    var branchCenterPoint;
+    this.clearMarkers();//done
+    this.getBranchesOfCityRestrict(city,restrict).then((result) => {
+      this.branchesDDL = [...result];
+      this.branchesDDL.forEach(element => {
+        var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
+        //if ( currentBounds.contains(currentLocation)) {
+          this.createMarker(element.CenterPoint,element.Name);
+          this.moveToLocation(element.CenterPoint);
+        //}
+      });
+  });
+  
   }
   
   getRestrictsCity(cityName:string)
@@ -109,7 +124,8 @@ export class places implements OnInit {
     navigator.geolocation.getCurrentPosition((location) => {
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: {lat: location.coords.latitude, lng: location.coords.longitude},
-        zoom: 15
+        zoom: 9,
+        fullscreenControl: false
       });
       this.set_bounds().then(function () {
         currentBounds = map.getBounds();

@@ -10,8 +10,8 @@
         </ion-col>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="restrictName" (ngModelChange)="onRestrictChange($event)" interface="popover" placeholder="الفرع">
-                    <ion-option  *ngFor="let restrict of restricts" [value]="restrict.Name">{{restrict.Name}}</ion-option>
+                <ion-select [(ngModel)]="branchName" (ngModelChange)="onRestrictChange(cityName,$event)" interface="popover" placeholder="الفرع">
+                    <ion-option  *ngFor="let branch of branches" [value]="branch.Name">{{branch.Name}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-col>

@@ -47,15 +47,15 @@ export class MapsProvider {
   }
   getRestrictsCityProv(city:string)
   {
-    this.restrictsCollection = this.afs.collection('Restriction');
-    this.restricts = this.restrictsCollection.snapshotChanges().map(changes => {
+    this.branchesCollection = this.afs.collection('Branches');
+    this.branches = this.branchesCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
-        const data = a.payload.doc.data() as Restrict;
+        const data = a.payload.doc.data() as Branch;
         data.id = a.payload.doc.id;
         return data;
       }).filter(opt => opt.City == city);
     });
-    return this.restricts;
+    return this.branches;
   }
 
   async getBranchesCityProv(city:string, restrict:string)
@@ -64,7 +64,7 @@ export class MapsProvider {
     this.afs.collection('Branches').ref.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         var tempData = doc.data() as Branch;
-        if(tempData.City == city&&(restrict==undefined || tempData.Restriction== restrict))
+        if(tempData.City == city&&(restrict==undefined || tempData.Name == restrict))
         {
           branarry.push(doc.data() as Branch);
         }
