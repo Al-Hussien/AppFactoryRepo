@@ -35,6 +35,8 @@ import { HttpModule } from '@angular/http';
 
 import { LazyLoadImageModule } from 'ng2-lazyload-image';
 
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 const environment = {
   production: false,
   firebase: {
@@ -65,7 +67,8 @@ const environment = {
     // CacheModule.forRoot()
     // ImgCacheModule
     IonicImageLoader.forRoot(),
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
