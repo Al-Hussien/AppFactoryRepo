@@ -33,7 +33,7 @@ export class InofferPage implements OnInit {
     
   }
   goBack() {
-    this.navCtrl.pop(offers)
+    //this.navCtrl.pop(offers)
   }
   ionViewWillEnter() {
     debugger

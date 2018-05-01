@@ -12,7 +12,7 @@
           <span *ngFor="let branch of occasionObject.Branch">{{branch.Name}} </span>
       </ion-row>
   <ion-card *ngFor="let cssStyle of StyleCSSArry">
-      <img-loader src="{{cssStyle['imgUrl']}}" useImg></img-loader>
+      <img src="{{cssStyle['imgUrl']}}" useImg class="thumb-img" imageViewer>
       <ion-row class="in-action">
           <ion-col>
             <button (click)="addFav(cssStyle['imgUrl'], cssStyle['elemNo'])" ion-button icon-right clear small [ngClass]="cssStyle['CSSStyle']">
