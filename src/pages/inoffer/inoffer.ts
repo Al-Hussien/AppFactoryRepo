@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Occasion } from '../../models/occasionModel';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { ImageLoader } from 'ionic-image-loader';
+// import { ImageLoader } from 'ionic-image-loader';
 import { OnInit } from '@angular/core';
 import { offers } from '../offers/offers';
 
@@ -33,7 +33,7 @@ export class InofferPage implements OnInit {
     
   }
   goBack() {
-    this.navCtrl.pop(offers)
+    this.navCtrl.pop()
   }
   ionViewWillEnter() {
     debugger
