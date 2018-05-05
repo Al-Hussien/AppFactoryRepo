@@ -36,6 +36,8 @@ import { HttpModule } from '@angular/http';
 import { LazyLoadImageModule } from 'ng2-lazyload-image';
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { OneSignal } from '@ionic-native/onesignal';
+
 
 const environment = {
   production: false,
@@ -89,7 +91,8 @@ const environment = {
     Geolocation,
     MapsProvider,
     LocalNotifications,
-    SocialSharing
+    SocialSharing,
+    OneSignal
   ]
 })
 export class AppModule {}

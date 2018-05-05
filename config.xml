@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.fatMrkt" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>fatMrkt</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -19,6 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -89,5 +90,6 @@
     <plugin name="cordova-plugin-local-notification" spec="~0.9.0-beta.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="~5.4.0" />
     <allow-navigation href="http://192.168.1.5:8100" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
     <engine name="android" spec="~6.1.2" />
 </widget>

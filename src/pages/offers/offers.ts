@@ -7,6 +7,8 @@ import { Occasion } from '../../models/occasionModel';
 import { parseDate, DateTimeData } from 'ionic-angular/util/datetime-util';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { OnInit } from '@angular/core';
+import { OneSignal } from '@ionic-native/onesignal';
+
 
 @Component({
   selector: 'page-offers',
@@ -24,10 +26,12 @@ export class offers {
   
   constructor(public navCtrl: NavController,public navParm: NavParams, private occasionProvider: OccasionProvider, public localNotifications: LocalNotifications,
     public platform: Platform,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private oneSignal: OneSignal) {
   }
 
   ionViewWillEnter() {
+  this.oneSignalCall()
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
     if(ImageArrayOject == null){
@@ -134,7 +138,7 @@ export class offers {
     });
   }
 
-
+  
   openOfferPage(inputData: Occasion ) {
     this.navCtrl.push(InofferPage, {"inofferObject":inputData});
   }
@@ -187,6 +191,24 @@ export class offers {
       return 'file://assets/sounds/Rooster.caf'
     }
   }
+  oneSignalCall()
+  {
+    this.oneSignal.startInit('352ff006-4575-4c80-bac8-8c899621fef3', '21815449607');
+
+this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+this.oneSignal.handleNotificationReceived().subscribe(() => {
+ // do something when notification is received
+ alert("noti reviv")
+});
+
+this.oneSignal.handleNotificationOpened().subscribe(() => {
+  // do something when a notification is opened
+ alert("noti reviv")
   
+});
+
+this.oneSignal.endInit();
+  }
 
 }
