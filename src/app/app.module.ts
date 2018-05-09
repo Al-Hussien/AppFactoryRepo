@@ -38,6 +38,7 @@ import { LazyLoadImageModule } from 'ng2-lazyload-image';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { OneSignal } from '@ionic-native/onesignal';
 
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 const environment = {
   production: false,
@@ -92,7 +93,8 @@ const environment = {
     MapsProvider,
     LocalNotifications,
     SocialSharing,
-    OneSignal
+    OneSignal,
+    AdMobFree
   ]
 })
 export class AppModule {}

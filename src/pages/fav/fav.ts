@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { OnInit } from '@angular/core';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 @Component({
   selector: 'fav',
@@ -9,7 +11,7 @@ import { OnInit } from '@angular/core';
 export class fav {
   ImageURLArray:string[];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private socialSharing: SocialSharing) {
   }
 
   ionViewWillEnter() {
@@ -38,6 +40,28 @@ export class fav {
       ImageArrayOject["imgArry"] = this.ImageURLArray;
     }
     localStorage.setItem("FavImage", JSON.stringify(ImageArrayOject));
+  }
+  shareOffer(imgUrl: string)
+  {
+    // this.socialSharing.canShareVia('com.facebook.katana','Test canShareVia','Hi there',null,imgUrl)
+    // .then(function (params:any) {
+    //   console.log("succeed");
+    // }).catch(function (params:any) {
+    //   console.log("failed");
+    // })
+
+    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
+    .then(function (params:any) {
+      console.log("succeed");
+    }).catch(function (params:any) {
+      console.log("failed");
+    })
+    // this.socialSharing.shareViaFacebook("Fathallah Market Offer",imgUrl,"https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification")
+    // .then(function (params:any) {
+    //   console.log("succeed");
+    // }).catch(function (params:any) {
+    //   console.log("failed");
+    // })
   }
 
 }
