@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/observable';
 
 import { Branch } from '../../models/BranchModel';
-import { forEach } from '@firebase/util';
+// import { forEach } from '@firebase/util';
 import { City } from '../../models/CityModel';
 import { Restrict } from '../../models/RestrictModel';
 import { GeoPoint } from '@firebase/firestore-types';
@@ -44,7 +44,6 @@ export class MapsProvider {
     
     this.afs.collection('About').ref.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        var tempData = doc.data() as About;
         abtArry.push(doc.data() as About);
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data() as Branch);

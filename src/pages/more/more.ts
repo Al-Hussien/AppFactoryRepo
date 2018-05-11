@@ -20,7 +20,6 @@ export class more {
   }
   shareOffer(imgUrl: string)
   {
-
     this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
     .then(function (params:any) {
       console.log("succeed");
@@ -33,6 +32,5 @@ export class more {
     this.mapsProvider.getAboutImg().then(function (res:About) {
       this.imgUrlAbout = res.ImgUrl;
     })
-    var temp 
   }
 }

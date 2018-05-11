@@ -4,9 +4,9 @@ import { InofferPage } from '../inoffer/inoffer';
 
 import { OccasionProvider } from '../../providers/occasion/occasion';
 import { Occasion } from '../../models/occasionModel';
-import { parseDate, DateTimeData } from 'ionic-angular/util/datetime-util';
+// import { parseDate, DateTimeData } from 'ionic-angular/util/datetime-util';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { OnInit } from '@angular/core';
+// import { OnInit } from '@angular/core';
 import { OneSignal } from '@ionic-native/onesignal';
 
 
@@ -143,20 +143,20 @@ export class offers {
     this.navCtrl.push(InofferPage, {"inofferObject":inputData});
   }
 
-  fireNotification(newOccCnt) {
-    var date = new Date();
-    this.localNotifications.schedule({
-      text: 'كارفور',
-      led: 'FF0000',
-      sound: this.setSound(),
-    });
-    let alert = this.alertCtrl.create({
-      title: 'عرض جديد!',
-      subTitle: 'يوجد '+ newOccCnt +' عرض جديد',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
+  // fireNotification(newOccCnt) {
+  //   var date = new Date();
+  //   this.localNotifications.schedule({
+  //     text: 'كارفور',
+  //     led: 'FF0000',
+  //     sound: this.setSound(),
+  //   });
+  //   let alert = this.alertCtrl.create({
+  //     title: 'عرض جديد!',
+  //     subTitle: 'يوجد '+ newOccCnt +' عرض جديد',
+  //     buttons: ['OK']
+  //   });
+  //   alert.present();
+  // }
   // addThis(elem)
   // {
   //   this.tempArry.push(elem);
@@ -184,13 +184,13 @@ export class offers {
     // this.occasions.concat(this.MoreThanZeroDays,this.ZeroDays)//.concat(this.ZeroDays);
     //this.occasions.concat(this.ZeroDays)//.concat(this.ZeroDays);
 }
-  setSound() {
-    if (this.platform.is('android')) {
-      return 'file://assets/sounds/Rooster.mp3'
-    } else {
-      return 'file://assets/sounds/Rooster.caf'
-    }
-  }
+  // setSound() {
+  //   if (this.platform.is('android')) {
+  //     return 'file://assets/sounds/Rooster.mp3'
+  //   } else {
+  //     return 'file://assets/sounds/Rooster.caf'
+  //   }
+  // }
   oneSignalCall()
   {
     this.oneSignal.startInit('352ff006-4575-4c80-bac8-8c899621fef3', '21815449607');

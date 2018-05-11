@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/observable';
 
 import { Occasion } from '../../models/occasionModel';
-import { parseDate } from 'ionic-angular/util/datetime-util';
+// import { parseDate } from 'ionic-angular/util/datetime-util';
 
 @Injectable()
 export class OccasionProvider {

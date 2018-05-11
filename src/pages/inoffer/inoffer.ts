@@ -4,8 +4,7 @@ import { Occasion } from '../../models/occasionModel';
 import { SocialSharing } from '@ionic-native/social-sharing';
 // import { ImageLoader } from 'ionic-image-loader';
 import { OnInit } from '@angular/core';
-import { offers } from '../offers/offers';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+// import { offers } from '../offers/offers';
 
 /**
  * Generated class for the InofferPage page.
@@ -119,25 +118,4 @@ export class InofferPage implements OnInit {
     //   console.log("failed");
     // })
   }
-  // initAdMob()
-  // {
-  //   debugger
-  //   const bannerConfig: AdMobFreeBannerConfig = {
-  //     // add your config here
-  //     // for the sake of this example we will just use the test config
-  //     // id:'ca-app-pub-5131427677496672/9473220130',
-  //     isTesting: true,
-  //     autoShow: true
-  //    };
-  //    this.admobFree.banner.config(bannerConfig);
-  
-  //    this.admobFree.banner.prepare()
-  //      .then(() => {
-  //        alert("working")
-  //        // banner Ad is ready
-  //        // if we set autoShow to false, then we will need to call the show method here
-  //      })
-  //      .catch(e => console.log(e));
-  // }
-
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { OnInit } from '@angular/core';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 

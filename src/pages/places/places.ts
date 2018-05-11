@@ -1,12 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
+import { GoogleMap, GoogleMapsEvent} from '@ionic-native/google-maps';
 import { MapsProvider } from '../../providers/maps/maps';
 import { Branch } from '../../models/BranchModel';
 import { City } from '../../models/CityModel';
 import { Restrict } from '../../models/RestrictModel';
 import { GeoPoint } from '@firebase/firestore-types';
-import { Title } from '@angular/platform-browser';
+// import { Title } from '@angular/platform-browser';
 // import { googlemaps, google} from '@types/googlemaps';
 import { OnInit } from '@angular/core';
 
@@ -76,7 +76,7 @@ export class places implements OnInit {
 
   onRestrictChange(city:string, restrict:string)
   {
-    var branchCenterPoint;
+    // var branchCenterPoint;
     this.clearMarkers();//done
     this.getBranchesOfCityRestrict(city,restrict).then((result) => {
       this.branchesDDL = [...result];
