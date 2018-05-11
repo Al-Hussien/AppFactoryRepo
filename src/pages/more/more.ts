@@ -21,7 +21,7 @@ export class more {
   shareOffer(imgUrl: string)
   {
 
-    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",null,imgUrl)
+    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
     .then(function (params:any) {
       console.log("succeed");
     }).catch(function (params:any) {
