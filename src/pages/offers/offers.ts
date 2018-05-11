@@ -54,7 +54,7 @@ export class offers {
       
       if(this.OccCnt < occasions.length)
       {
-        this.fireNotification(occasions.length-this.OccCnt);
+        //this.fireNotification(occasions.length-this.OccCnt);
         this.OccCnt = occasions.length;
         var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
         if(OccassionNewCountOject == null)
