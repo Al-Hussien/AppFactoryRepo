@@ -1,3 +1,62 @@
 more {
+    color: #f7921c;
+    text-align: center;    
+    img{
+        width: 35%;
+        margin: auto;
+        display: block;
+    }
+    h2{
+        margin-top: 0;
+        color: #f7921c;
+        font-size: 26px;
+        font-weight: bold;
+    }
+    h6{
+        color: #555;
+        font-size: 14px;
+        margin: 0 0 5px 0;
+        font-weight: bold;
+    }
+    p{
+        margin: 0;
+        padding: 0 16px;
+        color: #969696;
+        span.gen{
+            color: #f7921c;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px auto 5px;
+            display: inline-block;
+        }
+        span.bran{
+            color: #555;
+            font-size: 14px;
+            display: inline-block;
+            margin: 10px auto;
+            font-weight: bold;
+        }
+        span.about-bran{
+            color: #777;
+            margin-bottom: 8px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 12px;
+
+        }
+    }
+    button.button-outline-md{
+        margin: auto 8px;
+        color: #f7921c;
+        width: 30%;
+        border-color: #f7921c;
+        display: inline-block;
+        margin-bottom: 14px;
+        ion-icon{
+            margin-left: 5px;
+            top: -2px;
+            position: relative;
+        }
+    }
 
 }

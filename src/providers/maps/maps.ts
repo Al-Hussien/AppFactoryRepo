@@ -8,6 +8,7 @@ import { forEach } from '@firebase/util';
 import { City } from '../../models/CityModel';
 import { Restrict } from '../../models/RestrictModel';
 import { GeoPoint } from '@firebase/firestore-types';
+import { About } from '../../models/AboutModel';
 
 @Injectable()
 export class MapsProvider {
@@ -30,9 +31,32 @@ export class MapsProvider {
   //   latitude:6,
 
   // }
+  aboutCollection: AngularFirestoreCollection<About>;
+  abouts: Observable<About[]>;
+  aboutDoc: AngularFirestoreDocument<About>;
+  abtArry:About[]=[];
+  
   constructor(public afs: AngularFirestore) {
   }
-
+  async getAboutImg()
+  {
+    let abtArry:About[]=[];
+    
+    this.afs.collection('About').ref.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        var tempData = doc.data() as About;
+        abtArry.push(doc.data() as About);
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data() as Branch);
+      });    
+    });
+    do {
+      await this.delay(200);
+    } while (abtArry.length==0);
+    this.abtArry = [...abtArry];
+    
+    return this.abtArry[0];
+  }
   getCitiesProv()
   {
     this.cityCollection = this.afs.collection('Cities');
