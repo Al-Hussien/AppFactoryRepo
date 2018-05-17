@@ -8,6 +8,7 @@ import { Occasion } from '../../models/occasionModel';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 // import { OnInit } from '@angular/core';
 import { OneSignal } from '@ionic-native/onesignal';
+// import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 
 @Component({
@@ -27,10 +28,11 @@ export class offers {
   constructor(public navCtrl: NavController,public navParm: NavParams, private occasionProvider: OccasionProvider, public localNotifications: LocalNotifications,
     public platform: Platform,
     public alertCtrl: AlertController,
-    private oneSignal: OneSignal) {
+    private oneSignal: OneSignal/*,private admobFree: AdMobFree*/) {
   }
 
   ionViewWillEnter() {
+    // this.initAdMob();
   this.oneSignalCall()
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     var OccassionNewCountOject = JSON.parse(localStorage.getItem("OccCnt"));
@@ -123,6 +125,8 @@ export class offers {
         // days left calc days letf
         // calc total days
         //divide 
+        element.occasionCount = element.Image.length-1>0?"+"+(element.Image.length-1).toString():"";
+        element.occCircleStyle = element.Image.length-1>0?true:false;
         element.DaysPastPercentageCSS = 
           (
             Math.round((parseInt(element.OfferDaysPast)/parseInt(element.OfferDays)*100)* 100) / 100
@@ -162,7 +166,6 @@ export class offers {
   //   this.tempArry.push(elem);
   // }
   sortOccasion(newOccCnt) {
-    debugger
     var newArr:Occasion[];
     newArr = [...newOccCnt];
 
@@ -195,20 +198,38 @@ export class offers {
   {
     this.oneSignal.startInit('352ff006-4575-4c80-bac8-8c899621fef3', '21815449607');
 
-this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-this.oneSignal.handleNotificationReceived().subscribe(() => {
- // do something when notification is received
- alert("noti reviv")
-});
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
 
-this.oneSignal.handleNotificationOpened().subscribe(() => {
-  // do something when a notification is opened
- alert("noti reviv")
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
   
-});
+    });
 
-this.oneSignal.endInit();
+    this.oneSignal.endInit();
   }
+  // initAdMob()
+  // {
+  //   const bannerConfig: AdMobFreeBannerConfig = {
+  //     id:'ca-app-pub-5131427677496672/9473220130',
+  //     // size:,
+  //     isTesting: false,
+  //     autoShow: true,
+  //     overlap:true
+  //    };
+     
+  //    this.admobFree.banner.config(bannerConfig);
+  
+  //    this.admobFree.banner.prepare()
+  //      .then(() => {
+  //       //  alert("working")
+  //        // banner Ad is ready
+  //        // if we set autoShow to false, then we will need to call the show method here
+  //      })
+  //      .catch(e => console.log(e));
+  // }
 
 }

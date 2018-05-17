@@ -2,7 +2,8 @@ page-offers {
     .offer-card{
         .date-row{
            color: #fff;
-           margin-top: 20px;
+           margin-top: 25px;
+           margin-bottom: 10px;
            bottom: -4px;
            position: relative;
             & .col:first-child{
@@ -35,7 +36,7 @@ page-offers {
                     top: -26px;
                     height: 20px;
                     background-color: #e8e8e8;
-                    left: -12px;
+                    left: -5px;
                     color: #ef9300;
                     font-size: 13px;
                     padding: 2px 7px;

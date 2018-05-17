@@ -1,17 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Occasion } from '../../models/occasionModel';
 import { SocialSharing } from '@ionic-native/social-sharing';
-// import { ImageLoader } from 'ionic-image-loader';
 import { OnInit } from '@angular/core';
-// import { offers } from '../offers/offers';
-
-/**
- * Generated class for the InofferPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AdMobFree, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free';
 
 @IonicPage()
 @Component({
@@ -20,25 +12,69 @@ import { OnInit } from '@angular/core';
 })
 export class InofferPage implements OnInit {
   occasionObject: Occasion;
+  oddEnterCount: number;
   ImageURLArray:string[]=[];
   StyleCSSArry:{imgUrl:String,CSSStyle:String,elemNo:number}[]=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private socialSharing: SocialSharing/*,private imageLoader: ImageLoader,private admobFree: AdMobFree*/) {
+
+
+  interstitialConfig: AdMobFreeInterstitialConfig ={
+    autoShow: true,
+    isTesting:false,
+    id:'ca-app-pub-5131427677496672/9712693594'
   }
 
+
+
+  constructor(
+    platform: Platform
+    ,public navCtrl: NavController
+    , public navParams: NavParams
+    ,private socialSharing: SocialSharing
+    ,private admobFree: AdMobFree
+  ) {
+
+      // platform.registerBackButtonAction(() => 
+      // {
+      //   this.initAdMob();
+      //   this.navCtrl.pop();
+      // },1);
+
+
+    }
+
   ngOnInit() {
-    debugger
     this.occasionObject = this.navParams.get('inofferObject');
-    
+  }
+  ionViewWillLeave() {
+    if (this.oddEnterCount % 2 != 0) {
+      this.initAdMob();
+    }
+    // this.initAdMob();
   }
   goBack() {
+    // if (this.oddEnterCount % 2 != 0) {
+    //   this.initAdMob();
+    // }
     this.navCtrl.pop()
   }
+
   ionViewWillEnter() {
-    debugger
-    // this.initAdMob()
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
+    var oddEnterOject = JSON.parse(localStorage.getItem("oddEnterCount"));
+    if(oddEnterOject != null){
+      this.oddEnterCount = oddEnterOject["oddEnterCount"];
+      this.oddEnterCount++;
+      oddEnterOject["oddEnterCount"] = this.oddEnterCount;
+      localStorage.setItem("oddEnterCount", JSON.stringify(oddEnterOject));
+    }
+    else
+    {
+      this.oddEnterCount = 1;
+      var tempObj: { oddEnterCount: number; } = { oddEnterCount: this.oddEnterCount };
+      oddEnterOject = {...tempObj}
+      localStorage.setItem("oddEnterCount", JSON.stringify(oddEnterOject));
+    }
     if(ImageArrayOject != null){
       this.ImageURLArray = ImageArrayOject["imgArry"];
       if (this.ImageURLArray.length >0) {
@@ -60,15 +96,10 @@ export class InofferPage implements OnInit {
           
         }
       }
-      
     }
   }
 
-
   addFav(imgUrl: string, elemNo:number ) {
-    debugger
-    // this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active"});
-    // this.StyleCSSArry[elemNo]['CSSStyle'] = "active";
     if (this.StyleCSSArry[elemNo].CSSStyle == "active") {
       this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"",elemNo:elemNo});
       for (let index = 0; index < this.ImageURLArray.length; index++) {
@@ -82,7 +113,6 @@ export class InofferPage implements OnInit {
       this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active",elemNo:elemNo});
       this.ImageURLArray.push(imgUrl);
     }
-    //this.StyleCSSArry.splice(elemNo , 1,{imgUrl:this.occasionObject.Image[elemNo],CSSStyle:"active",elemNo:elemNo});
     var ImageArrayOject = JSON.parse(localStorage.getItem("FavImage"));
     if(ImageArrayOject == null)
     {
@@ -98,24 +128,21 @@ export class InofferPage implements OnInit {
 
   shareOffer(imgUrl: string)
   {
-    // this.socialSharing.canShareVia('com.facebook.katana','Test canShareVia','Hi there',null,imgUrl)
-    // .then(function (params:any) {
-    //   console.log("succeed");
-    // }).catch(function (params:any) {
-    //   console.log("failed");
-    // })
-
     this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
     .then(function (params:any) {
-      console.log("succeed");
     }).catch(function (params:any) {
-      console.log("failed");
     })
-    // this.socialSharing.shareViaFacebook("Fathallah Market Offer",imgUrl,"https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification")
-    // .then(function (params:any) {
-    //   console.log("succeed");
-    // }).catch(function (params:any) {
-    //   console.log("failed");
-    // })
+  }
+  initAdMob()
+  {
+      this.admobFree.interstitial.config(this.interstitialConfig);
+
+      this.admobFree.interstitial.prepare()
+      .then(() => {
+        if (true) {
+          this.admobFree.interstitial.show();
+        }
+      })
+      .catch(e => console.log(e));
   }
 }

@@ -1,7 +1,7 @@
 
 <ion-content >
     <ion-card *ngFor="let imgURL of ImageURLArray">
-        <img src="{{imgURL}}">
+        <img src="{{imgURL}}" useImg class="thumb-img" imageViewer>
         <ion-row class="in-action">
             <ion-col>
               <button (click)="removeFav(imgURL)" ion-button icon-right clear small>

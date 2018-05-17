@@ -30,7 +30,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 
 
 // import { ImgCacheModule } from 'ng-imgcache';
-import { CacheModule } from 'ionic-cache';
+// import { CacheModule } from 'ionic-cache';
 import { HttpModule } from '@angular/http';
 
 import { LazyLoadImageModule } from 'ng2-lazyload-image';

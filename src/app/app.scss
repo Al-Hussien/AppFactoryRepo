@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,7 +12,6 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
 @font-face{
     font-family: "cairo";
     src: ("../assets/fonts/Cairo-Regular.ttf") format('truetype');
@@ -27,101 +24,129 @@
   body{
       direction: rtl;
     }
-    .scroll-content{
-      margin-top: 95px !important;
-    }
-    ion-tabs{
-      .tabbar{
+  ion-tabs{
+    .tabbar{
         top: 40px !important;
-        a.tab-button:last-of-type{
+        background: #f7921c !important;
+        height: 56px;
+      a.tab-button:last-of-type{
+        position: absolute;
+        top: -40px;
+        right: 0px;
+        height: 40px;
+        overflow: hidden;
+        max-height: 40px;
+        min-height: 40px;
+        .tab-button-icon{
+          color: #fff;
+        }
+        &::after , &::before{
+          display: none;
+        }      
+        
+      }
+      a.tab-button:nth-child(3){
+        &::before{
+          display: none;
+        } 
+      }
+      a.tab-button{
+        background-color: #f7921c;
+        color: #e8e8e8;
+        height: 100%;
+        .tab-button-icon{
+          color: #e8e8e8;
+        }
+        &::after{
+          content: "";
+          width: 100%;
+          height: 3px;
+          background-color: #fff;
           position: absolute;
-          top: -40px;
-          right: 0px;
-          height: 40px;
-          overflow: hidden;
-          max-height: 40px;
-          min-height: 40px;
-          .tab-button-icon{
-            color: #fff;
-          }
-          &::after , &::before{
-            display: none;
-          }      
+          bottom: 0;
+          right: 0;
+          left: 0;
+          opacity: 0;
+          transition: 0.3s;
+        }
+        &::before{
+          content: "";
+          width: 1px;
+          height: 100%;
+          background: linear-gradient(to top, transparent ,  rgba(255, 255, 255, 0.32), transparent);
+          position: absolute;
+          bottom: 0;
+          top: 0;
+          left: 0;
+        }
+      }
+      .tab-button[aria-selected=true]{
+        color: #fff;
+        font-weight: bold;
+        .tab-button-icon{
+          color: #fff;
+        }
+        &::after{
+          opacity: 1;
+          transition: 0.3s;
           
         }
-        a.tab-button:nth-child(3){
-          &::before{
-            display: none;
-          } 
-        }
-        a.tab-button{
-          background-color: #f7921c;
-          color: #e8e8e8;
-          .tab-button-icon{
-            color: #e8e8e8;
-          }
-          &::after{
-            content: "";
-            width: 100%;
-            height: 3px;
-            background-color: #fff;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            opacity: 0;
-            transition: 0.3s;
-          }
-          &::before{
-            content: "";
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(to top, transparent ,  rgba(255, 255, 255, 0.32), transparent);
-            position: absolute;
-            bottom: 0;
-            top: 0;
-            left: 0;
-          }
-        }
-        .tab-button[aria-selected=true]{
-          color: #fff;
-          font-weight: bold;
-          .tab-button-icon{
-            color: #fff;
-          }
-          &::after{
-            opacity: 1;
-            transition: 0.3s;
-            
-          }
-        }
-      } 
-      .tabs-div{
-        background-color: #f7921c;
-        height: 40px;
-        z-index: 9;
-        position: relative;
-        text-align: center;
-        padding-top: 3px;
-        img{
-          height: 90%;
-          margin-top: 3px;
-          margin-right: 5px;
-          margin-left: -5px;
-          display: inline-block;
-        }
-        h6{
-          position: relative;
-          display: inline-block;
-          top: -12px;
-          font-size: 16px;
-          font-weight: bold;
-          color: #fff;
-          // width: calc( 100% - 75px);
-          text-align: center;
-        }
       }
-      .ion-ios-pricetags-outline:before{
-        content: "\f48f";
+    } 
+    .tabs-div{
+      background-color: #f7921c;
+      height: 40px;
+      z-index: 9;
+      position: relative;
+      text-align: center;
+      padding-top: 3px;
+      img{
+        height: 90%;
+        margin-top: 3px;
+        margin-right: 5px;
+        margin-left: -5px;
+        display: inline-block;
+      }
+      h6{
+        position: relative;
+        display: inline-block;
+        top: -12px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        // width: calc( 100% - 75px);
+        text-align: center;
       }
     }
+  
+  }
+  .scroll-content{
+    margin-top: 95px !important;
+    margin-bottom: 50px;
+  }
+  // @media (max-width:400px){
+  //   .scroll-content{
+  //     margin-bottom: 50px;
+      
+  //   }
+  // }
+  // @media (min-width:401px){
+  //   .scroll-content{
+  //     margin-bottom: 50px;
+      
+  //   }
+  // }
+  // @media (min-width:721px){
+  //   .scroll-content{
+  //     margin-bottom: 90px;
+      
+  //   }
+  // }
+  image-viewer{
+    ion-navbar{
+      direction: ltr;
+    }
+  }
+  .ion-ios-pricetags-outline:before{
+    content: "\f48f";
+  }

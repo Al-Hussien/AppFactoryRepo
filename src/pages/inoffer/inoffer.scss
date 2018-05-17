@@ -42,7 +42,7 @@ page-inoffer {
     .back-icon{
         position: fixed;
         left: 5px;
-        bottom: 24px;
+        bottom: 75px;
         z-index: 999;
         color: #fff;
         background-color: #f7921c;
@@ -97,7 +97,7 @@ page-inoffer {
                  top: -26px;
                  height: 20px;
                  background-color: #e8e8e8;
-                 left: -12px;
+                 left: -5px;
                  color: #ef9300;
                  font-size: 13px;
                  padding: 2px 7px;
@@ -196,7 +196,7 @@ page-inoffer {
         border: 3px solid #f1f1f1;
         border-radius: 5px;
         position: relative;
-        img-loader{
+        .img-loader{
             min-height: 250px;
             display: block;
             background-image: url(../assets/imgs/def.png) !important;

@@ -19,5 +19,7 @@ export interface Occasion {
     DaysPastPercentageCSS: string;
     Title: string;
     DaysLeftString: string;
+    occasionCount: string;
+    occCircleStyle: boolean;
     
   }

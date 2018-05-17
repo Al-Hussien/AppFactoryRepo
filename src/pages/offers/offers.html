@@ -9,7 +9,7 @@
         <img src="{{occasion.Image[0]}}">
         <span>
           <p>{{occasion.Title}}</p>
-          <span>{{occasion.Image.length-1}}+</span>
+          <span *ngIf="occasion.occCircleStyle">{{occasion.occasionCount}}</span>
         </span>
       </a>
       <ion-card-content>

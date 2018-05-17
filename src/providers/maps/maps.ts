@@ -129,7 +129,6 @@ export class MapsProvider {
     });
 }
   async getCityCenterPointProv(city: string) {
-    debugger
     // this.cityCollection = this.afs.collection('Cities');
     // this.cityCollection.snapshotChanges().map(changes => {
     //   return changes.map(a => {

@@ -42,7 +42,6 @@ export class places implements OnInit {
   }
 
   ngOnInit() {
-    debugger
     //fill the city ddl
     this.getCities();
     //fill up map

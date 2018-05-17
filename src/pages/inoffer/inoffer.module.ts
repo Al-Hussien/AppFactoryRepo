@@ -4,7 +4,7 @@ import { InofferPage } from './inoffer';
 
 @NgModule({
   declarations: [
-    InofferPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(InofferPage),
