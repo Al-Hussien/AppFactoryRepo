@@ -130,12 +130,13 @@ export class offers {
         element.DaysPastPercentageCSS = 
           (
             Math.round((parseInt(element.OfferDaysPast)/parseInt(element.OfferDays)*100)* 100) / 100
-          )>0?
-          (
-            Math.round((parseInt(element.OfferDaysPast)/parseInt(element.OfferDays)*100)* 100) / 100
-          ).toString()
-          :
-          "100";
+          ).toString();
+          // >0?
+          // (
+          //   Math.round((parseInt(element.OfferDaysPast)/parseInt(element.OfferDays)*100)* 100) / 100
+          // ).toString()
+          // :
+          // "100";
       });
 
       this.sortOccasion(this.occasions);

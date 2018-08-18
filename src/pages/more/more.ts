@@ -12,30 +12,40 @@ import { About } from '../../models/AboutModel';
 })
 export class more {
   aboutArry: About[];
-  imgUrlAbout: string;
+  imgUrlAbout: string = "https://play.google.com/store/apps/details?id=com.fatMrkt";
   constructor(public navCtrl: NavController, private socialSharing: SocialSharing, private mapsProvider: MapsProvider/*,private admobFree: AdMobFree*/) {
   }
   ngOnInit() {
   }
   ionViewWillEnter() {
     // this.initAdMob();
-    this.getAboutImg();
+    // this.getAboutImg();
+    this.imgUrlAbout = "https://play.google.com/store/apps/details?id=com.fatMrkt";
+  }
+  eval()
+  {
+    debugger
+    window.open("https://play.google.com/store/apps/details?id=com.fatMrkt");
   }
   shareOffer(imgUrl: string)
   {
-    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",imgUrl,"https://www.google.com/")
+    debugger
+    this.socialSharing.share("حمل تطبيق عروض فتح الله","فتح الله ماركت",null,this.imgUrlAbout)
     .then(function (params:any) {
       // console.log("succeed");
     }).catch(function (params:any) {
       // console.log("failed");
     })
   }
-  getAboutImg()
-  {
-    this.mapsProvider.getAboutImg().then(function (res:About) {
-      this.imgUrlAbout = res.ImgUrl;
-    })
-  }
+  // getAboutImg()
+  // {
+  //   this.imgUrlAbout = "https://play.google.com/store/apps/details?id=com.fatMrkt";
+  //   this.mapsProvider.getAboutImg().then(function (res:string) {
+  //     if (res != null || res != undefined) {
+  //       this.imgUrlAbout = res;
+  //     }
+  //   })
+  // }
   // initAdMob()
   // {
   //   const bannerConfig: AdMobFreeBannerConfig = {

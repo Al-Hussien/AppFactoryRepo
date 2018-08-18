@@ -16,11 +16,11 @@ export class InofferPage implements OnInit {
   ImageURLArray:string[]=[];
   StyleCSSArry:{imgUrl:String,CSSStyle:String,elemNo:number}[]=[];
 
-
+ admobFlagInit:boolean=false;
 
   interstitialConfig: AdMobFreeInterstitialConfig ={
     autoShow: true,
-    isTesting:false,
+    isTesting:true,
     id:'ca-app-pub-5131427677496672/9712693594'
   }
 
@@ -39,7 +39,15 @@ export class InofferPage implements OnInit {
       //   this.initAdMob();
       //   this.navCtrl.pop();
       // },1);
+      this.admobFree.interstitial.config(this.interstitialConfig);
 
+      this.admobFree.interstitial.prepare()
+      .then(() => {
+        if (true) {
+          this.admobFlagInit = true;
+        }
+      })
+      .catch(e => console.log(e));
 
     }
 
@@ -65,12 +73,14 @@ export class InofferPage implements OnInit {
     if(oddEnterOject != null){
       this.oddEnterCount = oddEnterOject["oddEnterCount"];
       this.oddEnterCount++;
+      console.log("ionenter=",this.oddEnterCount);
       oddEnterOject["oddEnterCount"] = this.oddEnterCount;
       localStorage.setItem("oddEnterCount", JSON.stringify(oddEnterOject));
     }
     else
     {
       this.oddEnterCount = 1;
+      console.log("ionenter=",this.oddEnterCount);
       var tempObj: { oddEnterCount: number; } = { oddEnterCount: this.oddEnterCount };
       oddEnterOject = {...tempObj}
       localStorage.setItem("oddEnterCount", JSON.stringify(oddEnterOject));
@@ -135,14 +145,8 @@ export class InofferPage implements OnInit {
   }
   initAdMob()
   {
-      this.admobFree.interstitial.config(this.interstitialConfig);
-
-      this.admobFree.interstitial.prepare()
-      .then(() => {
-        if (true) {
-          this.admobFree.interstitial.show();
-        }
-      })
-      .catch(e => console.log(e));
+    if (this.admobFlagInit) {
+    this.admobFree.interstitial.show();
+    }
   }
 }

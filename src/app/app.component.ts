@@ -81,7 +81,7 @@ constructor(platform: Platform/*, cache: CacheService*/, statusBar: StatusBar,
     const bannerConfig: AdMobFreeBannerConfig = {
       id:'ca-app-pub-5131427677496672/9473220130',
       // size:,
-      isTesting: false,
+      isTesting: true,
       autoShow: true,
       overlap:true
      };

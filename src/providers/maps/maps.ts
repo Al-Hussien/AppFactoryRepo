@@ -38,24 +38,24 @@ export class MapsProvider {
   
   constructor(public afs: AngularFirestore) {
   }
-  async getAboutImg()
-  {
-    let abtArry:About[]=[];
+  // async getAboutImg()
+  // {
+  //   let abtArry:About[]=[];
     
-    this.afs.collection('About').ref.get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        abtArry.push(doc.data() as About);
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, " => ", doc.data() as Branch);
-      });    
-    });
-    do {
-      await this.delay(200);
-    } while (abtArry.length==0);
-    this.abtArry = [...abtArry];
+  //   this.afs.collection('About').ref.get().then(function(querySnapshot) {
+  //     querySnapshot.forEach(function(doc) {
+  //       abtArry.push(doc.data() as About);
+  //         // doc.data() is never undefined for query doc snapshots
+  //         // console.log(doc.id, " => ", doc.data() as Branch);
+  //     });    
+  //   });
+  //   do {
+  //     await this.delay(200);
+  //   } while (abtArry.length==0);
+  //   this.abtArry = [...abtArry];
     
-    return this.abtArry[0];
-  }
+  //   return this.abtArry[0];
+  // }
   getCitiesProv()
   {
     this.cityCollection = this.afs.collection('Cities');
