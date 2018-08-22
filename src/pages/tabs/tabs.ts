@@ -14,7 +14,6 @@ export class TabsPage {
   tab2Root = places;
   tab3Root = fav;
   tab4Root = more;
-
   constructor() {
 
   }

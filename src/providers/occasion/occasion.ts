@@ -4,14 +4,12 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/observable';
 
 import { Occasion } from '../../models/occasionModel';
-// import { parseDate } from 'ionic-angular/util/datetime-util';
 
 @Injectable()
 export class OccasionProvider {
   occasionsCollection: AngularFirestoreCollection<Occasion>;
   occasions: Observable<Occasion[]>;
   occasionDoc: AngularFirestoreDocument<Occasion>;
-
   constructor(public afs: AngularFirestore) {
     this.occasionsCollection = this.afs.collection('Occasion');
     this.occasions = this.occasionsCollection.snapshotChanges().map(changes => {
@@ -22,6 +20,7 @@ export class OccasionProvider {
       });
     });
   }
+
   getOccasions() {
     return this.occasions;
   }

@@ -24,8 +24,6 @@ export class InofferPage implements OnInit {
     id:'ca-app-pub-5131427677496672/9712693594'
   }
 
-
-
   constructor(
     platform: Platform
     ,public navCtrl: NavController
@@ -33,12 +31,6 @@ export class InofferPage implements OnInit {
     ,private socialSharing: SocialSharing
     ,private admobFree: AdMobFree
   ) {
-
-      // platform.registerBackButtonAction(() => 
-      // {
-      //   this.initAdMob();
-      //   this.navCtrl.pop();
-      // },1);
       this.admobFree.interstitial.config(this.interstitialConfig);
 
       this.admobFree.interstitial.prepare()
@@ -58,12 +50,8 @@ export class InofferPage implements OnInit {
     if (this.oddEnterCount % 2 != 0) {
       this.initAdMob();
     }
-    // this.initAdMob();
   }
   goBack() {
-    // if (this.oddEnterCount % 2 != 0) {
-    //   this.initAdMob();
-    // }
     this.navCtrl.pop()
   }
 
@@ -143,6 +131,7 @@ export class InofferPage implements OnInit {
     }).catch(function (params:any) {
     })
   }
+  
   initAdMob()
   {
     if (this.admobFlagInit) {
