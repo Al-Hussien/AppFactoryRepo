@@ -3,15 +3,15 @@
     <ion-row>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="cityName" (ngModelChange)="onCityChange($event)" interface="popover" placeholder="المحافظه">
-                    <ion-option  *ngFor="let city of cities" [value]="city.Name">{{city.Name}}</ion-option>
+                <ion-select [(ngModel)]="cityId" (ngModelChange)="onCityChange($event)" interface="popover" placeholder="المحافظه">
+                    <ion-option  *ngFor="let city of cities" [value]="city.id">{{city.Name}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-col>
         <ion-col>
             <ion-item>
-                <ion-select [(ngModel)]="branchName" (ngModelChange)="onRestrictChange(cityName,$event)" interface="popover" placeholder="الفرع">
-                    <ion-option  *ngFor="let branch of branches" [value]="branch.Name">{{branch.Name}}</ion-option>
+                <ion-select [(ngModel)]="branchId" (ngModelChange)="onRestrictChange(cityId,$event)" interface="popover" placeholder="الفرع">
+                    <ion-option  *ngFor="let branch of branches" [value]="branch.id">{{branch.Name}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-col>

@@ -4,133 +4,106 @@ import { GoogleMap, GoogleMapsEvent} from '@ionic-native/google-maps';
 import { MapsProvider } from '../../providers/maps/maps';
 import { Branch } from '../../models/BranchModel';
 import { City } from '../../models/CityModel';
-import { Restrict } from '../../models/RestrictModel';
-import { GeoPoint } from '@firebase/firestore-types';
 import { OnInit } from '@angular/core';
+import { Enm_AlexRestriction, Enm_CairoRestriction, Enm_MapZoomLevel, Enm_CityNumberId } from '../../DataFiles/Enum';
+import { CenterPointLoc } from '../../models/GeoPointLocModel';
+import { Cnst_MapOptions } from '../../DataFiles/mapDataFile';
 
 declare var google;
 let map: any;
-let currentBounds: any;
-let infowindow: any;
-let options = {
-  enableHighAccuracy: true,
-  timeout: 200000,
-  maximumAge: 0
-};
+let mapsOptions = Cnst_MapOptions;
 let markersArry = [];
 @Component({
   selector: 'places',
   templateUrl: 'places.html'
 })
 export class places implements OnInit {
-  areaID: number;
   branches: Branch[];
-  branchesDDL: Branch[];
   cities: City[];
-  cityName:string;
-  restrictName:string;
-  branchName:string;
-  restricts: Restrict[];
+  cityId: number;
+  branchId:number;
 
   @ViewChild('map') mapElement: ElementRef;
-  constructor(public navCtrl: NavController, public platform: Platform, private mapsProvider: MapsProvider) {
+  constructor( public navCtrl: NavController, public platform: Platform, private mapsProvider: MapsProvider ) {
   }
 
   ngOnInit() {
-    this.getCities();
+    this.cities = this.mapsProvider.getCities();
     this.platform.ready().then(() => {
-      this.loadMap();
+      this.initiateMap();
     });
   }
-
-  getCities(){
-    this.mapsProvider.getCitiesProv().subscribe(cities => this.cities = cities);
-  }
-
-
-  onCityChange(city:string)
-  {
-    this.clearMarkers();
-    this.getBranchesOfCityRestrict(city).then((result) => {
-      this.branches = [...result];
-      this.branches.forEach(element => {
-        var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
-          this.createMarker(element.CenterPoint,element.Name);
-      });
-  });
-    this.goToCityLocation(city);
-  }
-
-  onRestrictChange(city:string, restrict:string)
-  {
-    this.clearMarkers();
-    this.getBranchesOfCityRestrict(city,restrict).then((result) => {
-      this.branchesDDL = [...result];
-      this.branchesDDL.forEach(element => {
-        var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
-          this.createMarker(element.CenterPoint,element.Name);
-          this.moveToLocation(element.CenterPoint);
-      });
-  });
-  
-  }
-  
-  getRestrictsCity(cityName:string){
-    this.mapsProvider.getRestrictsCityProv(cityName).subscribe(restricts => this.restricts = restricts );
-  }
-
-  getBranchesOfCityRestrict(city:string, restrict:string = undefined){
-    var x = this.mapsProvider.getBranchesCityProv(city,restrict)
-    return x;
-  }
-
-  loadMap() {
+  initiateMap() {
     map = new GoogleMap('map');
     map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      this.initMap()
+      navigator.geolocation.getCurrentPosition(
+        (location)=> this.PositionOnCallBackCameraMapSetting(location), 
+        (error) => {console.log(error);}, 
+        mapsOptions);
     });
   }
-
-  async set_bounds (){
-    do {
-      await this.delay(200);
-    } while (map.getBounds()==undefined);
-
-}
-
-  initMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      map = new google.maps.Map(this.mapElement.nativeElement, {
+  PositionOnCallBackCameraMapSetting(location: Position){
+    map = this.setMapCameraPositionToCurrentLocation(location);
+    var cityID = this.getCityIdFromCurrentGPSLocation(location);
+    this.cityId = cityID;
+    this.branches = this.mapsProvider.getCitiesByFilter(opt=>opt.CityId == cityID);
+    this.putBranchesMarkerOnMap(this.branches);
+  }
+  setMapCameraPositionToCurrentLocation(location: Position){
+    return new google.maps.Map(
+      this.mapElement.nativeElement,
+      {
         center: { lat: location.coords.latitude, lng: location.coords.longitude },
-        zoom: 9,
+        zoom: Enm_MapZoomLevel.Level,
         fullscreenControl: false
-      });
-      this.set_bounds().then(function () {
-        currentBounds = map.getBounds();
-      });
-      var cityName = (location.coords.longitude<=30.086384 && location.coords.longitude >= 29.534382)?"الإسكندرية":(location.coords.longitude<=30.086384 && location.coords.longitude >= 31.227967)?"القاهرة":""
-      this.getBranchesOfCityRestrict(cityName).then((result) => {
-        this.branches = [...result];
-        this.branches.forEach(element => {
-          var currentLocation = new google.maps.LatLng(element.CenterPoint.latitude,element.CenterPoint.longitude);
-            this.createMarker(element.CenterPoint,element.Name);
-        });
-      });
-    }, (error) => {
-      console.log(error);
-    }, options);
+      }
+    );
+  }
+  getCityIdFromCurrentGPSLocation(location: Position){
+    return ( location.coords.longitude >= Enm_AlexRestriction.minLongitude && location.coords.longitude <= Enm_AlexRestriction.maxLongitude )?
+      Enm_CityNumberId.Alexandria
+      :
+      ( location.coords.longitude <= Enm_CairoRestriction.minLongitude && location.coords.longitude >= Enm_CairoRestriction.maxLongitude )?
+      Enm_CityNumberId.Cairo
+      :
+      0;
+  }
+  putBranchesMarkerOnMap(branches: Branch[]){
+    branches.forEach((brnch)=>{
+      this.createMarker(brnch.CenterPoint,brnch.Name)
+    })
+  }
+  onCityChange(cityId:number){
+    debugger
+    this.clearMarkers();
+    this.branches = this.mapsProvider.getCitiesByFilter(opt => opt.CityId == cityId);
+    this.branches.forEach((brnch) => { this.createMarker(brnch.CenterPoint,brnch.Name); });
+    this.goToCityLocation(cityId);
   }
 
-  async delay(milliseconds: number) {
-    return new Promise<void>(resolve => {
-        setTimeout(resolve, milliseconds);
+  goToCityLocation(cityId: number){
+    var cityCenterPoint = this.mapsProvider.getCityCenterPoint(cityId);
+    this.moveToLocation(cityCenterPoint);
+  }
+  onRestrictChange(cityId:number, branchId:number)
+  {
+    debugger
+    this.clearMarkers();
+    var branchesDDL = this.mapsProvider.getCitiesByFilter(opt=> opt.id == branchId && opt.CityId == cityId);
+    branchesDDL.forEach(element => {
+      this.createMarker(element.CenterPoint,element.Name);
+      this.moveToLocation(element.CenterPoint);
     });
+  
   }
-
-  createMarker(place:GeoPoint, branchName:string) {
+  moveToLocation(centerPoint:CenterPointLoc){
+    var center = new google.maps.LatLng(centerPoint.Latitude, centerPoint.Longitude);
+    map.panTo(center);
+  }
+  createMarker(place:CenterPointLoc, branchName:string) {
     var marker = new google.maps.Marker({
       map: map,
-      position: {lat:place.latitude,lng:place.longitude},
+      position: {lat:place.Latitude,lng:place.Longitude},
       title:branchName
     });
     markersArry.push(marker);
@@ -140,7 +113,6 @@ export class places implements OnInit {
     var infoWindow = new google.maps.InfoWindow({
         content: message
     });
-
     google.maps.event.addListener(marker, 'click', function () {
         infoWindow.open(map, marker);
     });
@@ -149,20 +121,5 @@ export class places implements OnInit {
     for (let index = 0; index < markersArry.length; index++) {
       markersArry[index].setMap(null);
     }
-  }
-  deleteMarkers(){
-      this.clearMarkers();
-      markersArry = [];
-  }
-  
-  goToCityLocation(city: string){
-    this.mapsProvider.getCityCenterPointProv(city).then((result) => {
-      this.moveToLocation(result);
-    });
-  }
-
-  moveToLocation(centerPoint:GeoPoint){
-    var center = new google.maps.LatLng(centerPoint.latitude, centerPoint.longitude);
-    map.panTo(center);
   }
 }

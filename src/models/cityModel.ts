@@ -1,7 +1,7 @@
-import { GeoPoint } from "@firebase/firestore-types";
+import { CenterPointLoc } from "./GeoPointLocModel";
 
 export interface City {
-    id?: string;
+    id: number;
     Name: string;
-    CenterPoint: GeoPoint;
+    CenterPoint: CenterPointLoc;
   }
